@@ -18,9 +18,10 @@
 | [09-polzovateli-grafik.md](./09-polzovateli-grafik.md) | Преподаватели, ученики, график админов |
 | [10-novosti-zayavki.md](./10-novosti-zayavki.md) | Новости и заявки на вступление |
 | [11-lichniy-kabinet.md](./11-lichniy-kabinet.md) | Личный кабинет / отметка по QR |
-| [12-nastroiki.md](./12-nastroiki.md) | Настройки организации и профиля |
+| [12-nastroiki.md](./12-nastroiki.md) | Настройки организации, безопасность, **профиль и приватность** (152‑ФЗ) |
 | [13-obratnaya-svyaz.md](./13-obratnaya-svyaz.md) | Обратная связь с разработчиками |
-| [14-platforma-super-admin.md](./14-platforma-super-admin.md) | Панель платформы (SUPER_ADMIN) |
+| [14-platforma-super-admin.md](./14-platforma-super-admin.md) | Платформа (SUPER_ADMIN / SUPER_USER): тенанты, **версии тарифов**, рассылки, подписки |
+| [platform-subscription-plans.md](../../platform-subscription-plans.md) | Справочник планов, лимиты, сравнение, назначение подписок |
 
 ## Руководства по ролям
 
@@ -31,10 +32,8 @@
 - [role-prepodavatel.md](./role-prepodavatel.md) — INSTRUCTOR  
 - [role-uchenik.md](./role-uchenik.md) — STUDENT  
 - [role-subarendator.md](./role-subarendator.md) — SUB_TENANT  
-- [role-super-admin.md](./role-super-admin.md) — SUPER_ADMIN  
+- [role-super-admin.md](./role-super-admin.md) — SUPER_ADMIN / SUPER_USER  
 
 ## Скриншоты
 
 Иллюстрации хранятся в [../assets/README.md](../assets/README.md) — список имён файлов и как их получить.
-
-Формат DOCX из скрипта `scripts/generate_user_guide_docx.py` остаётся кратким обзором; **актуальное развёрнутое руководство — в этом каталоге `.md`**.
