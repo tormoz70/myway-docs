@@ -1,6 +1,6 @@
 # Соответствие Playwright E2E и ручным тест-кейсам
 
-Источник сценариев: [test-cases-by-role.md](test-cases-by-role.md) (синхронизирован с [docs/user-guides/ru/](../user-guides/ru/)).  
+Источник сценариев: [test-cases-by-role.md](test-cases-by-role.md) (синхронизирован с [user-guides/ru/](../user-guides/ru/)).  
 Запуск: [e2e-seed.md](e2e-seed.md), [frontend/e2e/README.md](../../frontend/e2e/README.md).  
 Подробное описание каждого теста: [e2e-tests-catalog.md](e2e-tests-catalog.md).
 

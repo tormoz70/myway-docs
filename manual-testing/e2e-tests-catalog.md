@@ -14,12 +14,12 @@
 | Уровень | Каталог / project | Backend | Кол-во |
 |---------|-------------------|---------|--------|
 | Integration manual | `e2e/manual/`, project `integration-manual` | обязателен | 56 |
-| Smoke / UI без API | `e2e/*.spec.ts`, `catalog.spec.ts`, project `chromium` | не нужен (mock или статика) | 11 |
-| **Всего** | | | **67** |
+| Smoke / UI без API | `e2e/*.spec.ts`, `catalog.spec.ts`, project `chromium` | не нужен (mock или статика) | 13 |
+| **Всего** | | | **69** |
 
 **Рекомендуемый полный прогон integration:** `cd frontend && npm run test:e2e:integration` (seed → 56 тестов → cleanup).
 
-**Сквозная нумерация:** **E2E-001 … E2E-067** — единый порядок по этому каталогу (сначала integration manual, затем smoke). В таблицах колонка **№**; ID TC-* сохранён для связи с [test-cases-by-role.md](test-cases-by-role.md).
+**Сквозная нумерация:** **E2E-001 … E2E-069** — единый порядок по этому каталогу (сначала integration manual, затем smoke). В таблицах колонка **№**; ID TC-* сохранён для связи с [test-cases-by-role.md](test-cases-by-role.md).
 
 ### Сводный указатель
 
@@ -102,7 +102,7 @@
 
 | № | ID | Название | Роль | Что проверяет |
 |---|-----|----------|------|----------------|
-| — | TC-SA-025 / PLT-10 | SMTP: рассылка с ящика admin | SUPER_ADMIN | Platform → «Рассылки» → черновик по коду тарифа студии с OWNER на реальном email → «Отправить»; письмо от `PLATFORM_EMAIL_FROM`, статус EMAIL `SENT`, in-app на главной OWNER. Spec: `docs/manual-testing/test-cases-by-role.md`. |
+| — | TC-SA-025 / PLT-10 | SMTP: рассылка с ящика admin | SUPER_ADMIN | Platform → «Рассылки» → черновик по коду тарифа студии с OWNER на реальном email → «Отправить»; письмо от `PLATFORM_EMAIL_FROM`, статус EMAIL `SENT`, in-app на главной OWNER. Spec: `manual-testing/test-cases-by-role.md`. |
 
 **SUPER_ADMIN:** email в `.env.e2e`; на время прогона оркестратор ставит пароль `TestPass12` и восстанавливает исходный hash из БД.
 
@@ -254,6 +254,13 @@
 | № | Название | Что делает тест |
 |---|----------|-----------------|
 | E2E-067 | owner can mark pass paid and refunded | Mock пропуска на вкладке «Активные пропуска»: «Отметить оплату» (сумма 4800) → «Оформить возврат» с причиной → «Возврат сохранён». |
+
+### 2.9. `etracker.smoke.spec.ts`
+
+| № | Название | Что делает тест |
+|---|----------|-----------------|
+| E2E-068 | unauthenticated user redirected from etracker to login | `/go/etracker/myway` без токена → редирект на `/go/login`. |
+| E2E-069 | etracker list page renders after login | Mock login + API проекта/списка задач → видны заголовок eTracker и кнопка «Новая задача». |
 
 ---
 
