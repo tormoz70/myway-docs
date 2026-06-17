@@ -15,9 +15,9 @@
 | [06-billing.md](./06-billing.md) | Биллинг коммунальных услуг |
 | [07-finansy.md](./07-finansy.md) | Финансы: оборот, расходы, начисления, категории |
 | [08-subarenda-i-eksport.md](./08-subarenda-i-eksport.md) | Субаренда и экспорт в 1С |
-| [09-polzovateli-grafik.md](./09-polzovateli-grafik.md) | Преподаватели, ученики, график админов |
+| [09-polzovateli-grafik.md](./09-polzovateli-grafik.md) | Сотрудники, клиенты, график и обращения сотрудников |
 | [10-novosti-zayavki.md](./10-novosti-zayavki.md) | Новости и заявки на вступление |
-| [11-lichniy-kabinet.md](./11-lichniy-kabinet.md) | Личный кабинет / отметка по QR |
+| [11-lichniy-kabinet.md](./11-lichniy-kabinet.md) | Личная «Главная», группа «Моё», отметка по QR, обращения |
 | [12-nastroiki.md](./12-nastroiki.md) | Настройки организации, безопасность, **профиль и приватность** (152‑ФЗ) |
 | [13-obratnaya-svyaz.md](./13-obratnaya-svyaz.md) | Обратная связь с разработчиками |
 | [14-platforma-super-admin.md](./14-platforma-super-admin.md) | Платформа (SUPER_ADMIN / SUPER_USER): тенанты, **версии тарифов**, рассылки, подписки |
@@ -32,6 +32,7 @@
 - [role-prepodavatel.md](./role-prepodavatel.md) — INSTRUCTOR  
 - [role-uchenik.md](./role-uchenik.md) — STUDENT  
 - [role-subarendator.md](./role-subarendator.md) — SUB_TENANT  
+- [role-uborshchitsa.md](./role-uborshchitsa.md) — CLEANER  
 - [role-super-admin.md](./role-super-admin.md) — SUPER_ADMIN / SUPER_USER  
 
 ## Скриншоты
