@@ -11,8 +11,10 @@
 - [05-propusk.md](./05-propusk.md) — все вкладки, включая станцию QR.
 - [06-billing.md](./06-billing.md), [07-finansy.md](./07-finansy.md) — при включённом тарифе.
 - [08-subarenda-i-eksport.md](./08-subarenda-i-eksport.md) — счета субаренды и экспорт 1С.
-- [09-polzovateli-grafik.md](./09-polzovateli-grafik.md) — приглашения и график админов.
+- [09-polzovateli-grafik.md](./09-polzovateli-grafik.md) — «Сотрудники», «Клиенты», график и обращения сотрудников.
 - [10-novosti-zayavki.md](./10-novosti-zayavki.md), [12-nastroiki.md](./12-nastroiki.md).
+
+Меню сгруппировано по смыслу (Моё / Работа / Каталог / Люди / Финансы / Студия) — см. [01-layout-i-menu.md](./01-layout-i-menu.md).
 
 ## Специфические полномочия
 
