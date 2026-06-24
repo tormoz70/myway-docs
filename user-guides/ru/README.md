@@ -20,7 +20,7 @@
 | [11-lichniy-kabinet.md](./11-lichniy-kabinet.md) | Личная «Главная», группа «Моё», отметка по QR, обращения |
 | [12-nastroiki.md](./12-nastroiki.md) | Настройки организации, безопасность, **профиль и приватность** (152‑ФЗ) |
 | [13-obratnaya-svyaz.md](./13-obratnaya-svyaz.md) | Обратная связь с разработчиками |
-| [14-platforma-super-admin.md](./14-platforma-super-admin.md) | Платформа (SUPER_ADMIN / SUPER_USER): тенанты, **версии тарифов**, рассылки, подписки |
+| [14-platforma-super-admin.md](./14-platforma-super-admin.md) | Платформа (SUPER_ADMIN / SUPER_USER): **метрики активности тенантов**, версии тарифов, рассылки, подписки |
 | [platform-subscription-plans.md](../../platform-subscription-plans.md) | Справочник планов, лимиты, сравнение, назначение подписок |
 
 ## Руководства по ролям
