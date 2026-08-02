@@ -262,6 +262,14 @@
 | E2E-068 | unauthenticated user redirected from etracker to login | `/go/etracker/myway` без токена → редирект на `/go/login`. |
 | E2E-069 | etracker list page renders after login | Mock login + API проекта/списка задач → видны заголовок eTracker и кнопка «Новая задача». |
 
+### 2.10. `staff-invite.spec.ts` (`@integration`, SMTP)
+
+| № | ID | Название | Роль | Что делает тест |
+|---|-----|----------|------|-----------------|
+| E2E-070 | TC-OWN-004B | staff invite API: смена email | OWNER | `POST .../invite` (CLEANER) → `PUT .../members/{id}` с новым email → `loginCredentialsEmailSent=true`; повторная смена — снова `true`. |
+| E2E-071 | TC-OWN-004C | staff invite API: сброс пароля | OWNER | После invite → `POST .../members/{id}/reset-credentials` → `loginCredentialsEmailSent=true`, `must_change_password` при входе. Пропуск при SMTP 502. |
+| — | TC-OWN-004 | staff invite API: негативный login | OWNER | После invite неверный пароль → 401. Cleanup: удаление участника. |
+
 ---
 
 ## 3. Зависимости между тестами
