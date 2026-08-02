@@ -27,8 +27,11 @@
 | TC-OWN-001 | `owner-settings.spec.ts` | automated |
 | TC-OWN-002 | `owner-settings.spec.ts` | automated |
 | TC-OWN-003 | `owner-settings.spec.ts` | automated (UI switch или API PATCH) |
-| TC-OWN-004 | `owner-settings.spec.ts` | partial (без почты) |
-| TC-OWN-005 | `owner-settings.spec.ts` | automated |
+| TC-OWN-004 | `owner-settings.spec.ts` | partial (UI invite + toast; письмо/SMTP — вручную) |
+| TC-OWN-004A | — | manual (первый вход + смена пароля) |
+| TC-OWN-004B | `staff-invite.spec.ts` | partial API (`@integration`, SMTP; UI — вручную) |
+| TC-OWN-005 | `owner-settings.spec.ts` | partial (smoke invite instructor) |
+| TC-OWN-005A | — | manual (смена роли в UI) |
 | TC-OWN-006 | `owner-operations.spec.ts` | automated (одобрение + отклонение) |
 | TC-OWN-007 | `owner-schedule-from-manual.spec.ts` | automated |
 | TC-OWN-008 | `owner-schedule-from-manual.spec.ts` | automated |

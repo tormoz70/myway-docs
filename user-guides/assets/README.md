@@ -32,7 +32,7 @@
 | `settings-org.png` | Настройки → «Организация» | [12-nastroiki.md](../ru/12-nastroiki.md) |
 | `privacy.png` | Профиль и приватность | [12-nastroiki.md](../ru/12-nastroiki.md) |
 | `feedback.png` | Обратная связь | [13-obratnaya-svyaz.md](../ru/13-obratnaya-svyaz.md) |
-| `platform-admin.png` | Платформа (`/go/platform`, вкладки тенантов/подписок) | [14-platforma-super-admin.md](../ru/14-platforma-super-admin.md) |
+| `platform-admin.png` | Платформа (`/go/platform`, вкладки тенантов/подписок/**заявок**) | [14-platforma-super-admin.md](../ru/14-platforma-super-admin.md) |
 
 ## Как обновить снимки
 
@@ -55,7 +55,7 @@ npm run capture:user-guide-screenshots
 
 Для `schedule-modal-attendance.png` нужна **сохранённая** запись типа **«Занятие»**: откройте её в расписании → вкладка **«Факт посещаемости»**.
 
-Для `platform-admin.png` — учётка **SUPER_ADMIN** или **SUPER_USER** (`/go/platform`). Желательно обновить снимок после появления вкладок **«Тарифы»** и **«Рассылки»** (май 2026).
+Для `platform-admin.png` — учётка **SUPER_ADMIN** или **SUPER_USER** (`/go/platform`). Желательно обновить снимок после появления вкладок **«Тарифы»**, **«Рассылки»** и **«Заявки»** (май 2026).
 
 В Markdown:
 
