@@ -9,7 +9,7 @@
 | [00-vvedenie.md](./00-vvedenie.md) | Роли, адреса URL, вход и регистрация |
 | [01-layout-i-menu.md](./01-layout-i-menu.md) | Общий вид кабинета, боковое меню, меню пользователя |
 | [02-raspisanie-podrobno.md](./02-raspisanie-podrobno.md) | **Расписание:** таблица, цвета, модальное окно записи, повторения, посещаемость, удаление |
-| [03-predmety-i-tarify.md](./03-predmety-i-tarify.md) | Предметы, тарифы, зачисления учеников |
+| [03-predmety-i-tarify.md](./03-predmety-i-tarify.md) | Предметы, тарифы, зачисления студентов |
 | [04-zaly.md](./04-zaly.md) | Залы (помещения) |
 | [05-propusk.md](./05-propusk.md) | Пропуска: шаблоны, выдача, станция QR, журнал |
 | [06-billing.md](./06-billing.md) | Биллинг коммунальных услуг |
@@ -30,7 +30,7 @@
 - [role-vladelec.md](./role-vladelec.md) — OWNER  
 - [role-administrator.md](./role-administrator.md) — ADMIN  
 - [role-prepodavatel.md](./role-prepodavatel.md) — INSTRUCTOR  
-- [role-uchenik.md](./role-uchenik.md) — STUDENT  
+- [role-student.md](./role-student.md) — STUDENT  
 - [role-subarendator.md](./role-subarendator.md) — SUB_TENANT  
 - [role-uborshchitsa.md](./role-uborshchitsa.md) — CLEANER  
 - [role-super-admin.md](./role-super-admin.md) — SUPER_ADMIN / SUPER_USER  
