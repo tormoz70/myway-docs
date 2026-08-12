@@ -1,40 +1,17 @@
-# Руководство пользователя MyWay (Markdown)
+# Руководства пользователя MyWay
 
-Подробные описания функций приложения: назначение разделов, устройство интерфейса и пошаговая работа. Документы ориентированы на реальную русскоязычную UI текущей версии фронтенда.
+Выберите **свою роль**. В каждом файле — только те экраны и действия, которые этой роли доступны. Участники студии живут на сайте студии (`/go/<slug>`), операторы — на платформе (`/go/platform`).
 
-## Структура
+| Роль | Руководство |
+|------|-------------|
+| Владелец студии (`OWNER`) | [role-vladelec.md](./role-vladelec.md) |
+| Администратор (`ADMIN`) | [role-administrator.md](./role-administrator.md) |
+| Преподаватель (`INSTRUCTOR`) | [role-prepodavatel.md](./role-prepodavatel.md) |
+| Студент (`STUDENT`) | [role-uchenik.md](./role-uchenik.md) |
+| Субарендатор (`SUB_TENANT`) | [role-subarendator.md](./role-subarendator.md) |
+| Клинер (`CLEANER`) | [role-uborshchitsa.md](./role-uborshchitsa.md) |
+| Оператор платформы (`SUPER_ADMIN` / `SUPER_USER`) | [role-super-admin.md](./role-super-admin.md) |
 
-| Документ | Содержание |
-|----------|------------|
-| [00-vvedenie.md](./00-vvedenie.md) | Роли, адреса URL, вход и регистрация |
-| [01-layout-i-menu.md](./01-layout-i-menu.md) | Общий вид кабинета, боковое меню, меню пользователя |
-| [02-raspisanie-podrobno.md](./02-raspisanie-podrobno.md) | **Расписание:** таблица, цвета, модальное окно записи, повторения, посещаемость, удаление |
-| [03-predmety-i-tarify.md](./03-predmety-i-tarify.md) | Предметы, тарифы, зачисления учеников |
-| [04-zaly.md](./04-zaly.md) | Залы (помещения) |
-| [05-propusk.md](./05-propusk.md) | Пропуска: шаблоны, выдача, станция QR, журнал |
-| [06-billing.md](./06-billing.md) | Биллинг коммунальных услуг |
-| [07-finansy.md](./07-finansy.md) | Финансы: оборот, расходы, начисления, категории |
-| [08-subarenda-i-eksport.md](./08-subarenda-i-eksport.md) | Субаренда и экспорт в 1С |
-| [09-polzovateli-grafik.md](./09-polzovateli-grafik.md) | Сотрудники, клиенты, график и обращения сотрудников |
-| [10-novosti-zayavki.md](./10-novosti-zayavki.md) | Новости и заявки на вступление |
-| [11-lichniy-kabinet.md](./11-lichniy-kabinet.md) | Личная «Главная», группа «Моё», отметка по QR, обращения |
-| [12-nastroiki.md](./12-nastroiki.md) | Настройки организации, безопасность, **профиль и приватность** (152‑ФЗ) |
-| [13-obratnaya-svyaz.md](./13-obratnaya-svyaz.md) | Обратная связь с разработчиками |
-| [14-platforma-super-admin.md](./14-platforma-super-admin.md) | Платформа (SUPER_ADMIN / SUPER_USER): **метрики активности тенантов**, **заявки на демонстрацию**, версии тарифов, рассылки, подписки |
-| [platform-subscription-plans.md](../../platform-subscription-plans.md) | Справочник планов, лимиты, сравнение, назначение подписок |
+Скриншоты: [../assets/README.md](../assets/README.md). Планы подписки платформы: [в репозитории myway](https://github.com/tormoz70/myway/blob/main/docs/platform-subscription-plans.md).
 
-## Руководства по ролям
-
-Каждый файл суммирует, **что именно может эта роль**, и отсылает к общим главам выше.
-
-- [role-vladelec.md](./role-vladelec.md) — OWNER  
-- [role-administrator.md](./role-administrator.md) — ADMIN  
-- [role-prepodavatel.md](./role-prepodavatel.md) — INSTRUCTOR  
-- [role-uchenik.md](./role-uchenik.md) — STUDENT  
-- [role-subarendator.md](./role-subarendator.md) — SUB_TENANT  
-- [role-uborshchitsa.md](./role-uborshchitsa.md) — CLEANER  
-- [role-super-admin.md](./role-super-admin.md) — SUPER_ADMIN / SUPER_USER  
-
-## Скриншоты
-
-Иллюстрации хранятся в [../assets/README.md](../assets/README.md) — список имён файлов и как их получить.
+Файлы `00-…`–`14-…` оставлены как указатели на разделы ролевых руководств (старые ссылки из приложения).

@@ -1,6 +1,6 @@
 # Иллюстрации для руководства пользователя
 
-Снимки в репозитории сняты с **локального** стенда `http://127.0.0.1:5173` под учёткой из `.env.e2e` (май 2026). При обновлении можно использовать тот же стенд или тестовый `http://46.21.244.114`. Имена файлов должны совпадать с ссылками в `user-guides/ru/*.md`.
+Снимки в репозитории сняты с **локального** стенда `http://127.0.0.1:5173` под учёткой из `.env.e2e` (май 2026). При обновлении можно использовать тот же стенд или тестовый `http://46.21.244.114`. Имена файлов должны совпадать с ссылками в `user-guides/ru/role-*.md`.
 
 Пересъёмка: из репозитория **myway** — `cd frontend && npm run capture:user-guide-screenshots` (пишет сюда; см. `MYWAY_DOCS_ROOT`).
 
@@ -8,31 +8,31 @@
 
 | Файл | Содержимое | Глава |
 |------|------------|-------|
-| `login-page.png` | `/go/login` | [00-vvedenie.md](../ru/00-vvedenie.md) |
-| `register-page.png` | `/go/register` | [00-vvedenie.md](../ru/00-vvedenie.md) |
-| `platform-landing.png` | `/go/` — лендинг (trailing slash обязателен для Vite `base`) | (справочно) |
-| `layout-sidebar.png` | Дашборд: меню + контент | [01-layout-i-menu.md](../ru/01-layout-i-menu.md) |
-| `schedule-week.png` | Расписание, «Неделя» | [02-raspisanie-podrobno.md](../ru/02-raspisanie-podrobno.md) |
-| `schedule-day.png` | Расписание, «День» | [02-raspisanie-podrobno.md](../ru/02-raspisanie-podrobno.md) |
-| `schedule-month.png` | Расписание, «Месяц» | [02-raspisanie-podrobno.md](../ru/02-raspisanie-podrobno.md) |
-| `schedule-modal-new.png` | Модал «Новая запись», «Свойства» | [02-raspisanie-podrobno.md](../ru/02-raspisanie-podrobno.md) |
-| `schedule-modal-attendance.png` | Модал записи, «Факт посещаемости» | [02-raspisanie-podrobno.md](../ru/02-raspisanie-podrobno.md) |
-| `subjects-table.png` | Предметы | [03-predmety-i-tarify.md](../ru/03-predmety-i-tarify.md) |
-| `rooms-table.png` | Залы | [04-zaly.md](../ru/04-zaly.md) |
-| `access-tabs.png` | Пропуска: вкладки | [05-propusk.md](../ru/05-propusk.md) |
-| `access-gate-qr.png` | Пропуска: «Станция / QR» | [05-propusk.md](../ru/05-propusk.md) |
-| `billing-tabs.png` | Биллинг | [06-billing.md](../ru/06-billing.md) |
-| `finance-turnover.png` | Финансы → сводный оборот | [07-finansy.md](../ru/07-finansy.md) |
-| `sublease-workspace.png` | Субаренда | [08-subarenda-i-eksport.md](../ru/08-subarenda-i-eksport.md) |
-| `export-1c.png` | Экспорт 1С | [08-subarenda-i-eksport.md](../ru/08-subarenda-i-eksport.md) |
-| `admin-work.png` | График работы администраторов | [09-polzovateli-grafik.md](../ru/09-polzovateli-grafik.md) |
-| `news-admin.png` | Новости студии | [10-novosti-zayavki.md](../ru/10-novosti-zayavki.md) |
-| `join-requests.png` | Заявки на участие | [10-novosti-zayavki.md](../ru/10-novosti-zayavki.md) |
-| `me-home.png` | Личный кабинет (карточки) | [11-lichniy-kabinet.md](../ru/11-lichniy-kabinet.md) |
-| `settings-org.png` | Настройки → «Организация» | [12-nastroiki.md](../ru/12-nastroiki.md) |
-| `privacy.png` | Профиль и приватность | [12-nastroiki.md](../ru/12-nastroiki.md) |
-| `feedback.png` | Обратная связь | [13-obratnaya-svyaz.md](../ru/13-obratnaya-svyaz.md) |
-| `platform-admin.png` | Платформа (`/go/platform`, вкладки тенантов/подписок/**заявок**) | [14-platforma-super-admin.md](../ru/14-platforma-super-admin.md) |
+| `login-page.png` | Вход в студию (`/go/<slug>/login`), заголовок — название студии | [role-vladelec.md](../ru/role-vladelec.md#vhod) |
+| `register-page.png` | Регистрация студии | [role-vladelec.md](../ru/role-vladelec.md#vhod) |
+| `platform-landing.png` | `/go/` — лендинг | [role-super-admin.md](../ru/role-super-admin.md) |
+| `layout-sidebar.png` | Дашборд: меню + контент | [role-vladelec.md](../ru/role-vladelec.md#kabinet-i-menyu) |
+| `schedule-week.png` | Расписание, «Неделя» | [role-vladelec.md](../ru/role-vladelec.md#raspisanie) |
+| `schedule-day.png` | Расписание, «День» | [role-vladelec.md](../ru/role-vladelec.md#raspisanie) |
+| `schedule-month.png` | Расписание, «Месяц» | [role-vladelec.md](../ru/role-vladelec.md#raspisanie) |
+| `schedule-modal-new.png` | Модал «Новая запись» | [role-vladelec.md](../ru/role-vladelec.md#raspisanie) |
+| `schedule-modal-attendance.png` | «Факт посещаемости» | [role-vladelec.md](../ru/role-vladelec.md#raspisanie) |
+| `subjects-table.png` | Предметы | [role-vladelec.md](../ru/role-vladelec.md#predmety) |
+| `rooms-table.png` | Залы | [role-vladelec.md](../ru/role-vladelec.md#zaly) |
+| `access-tabs.png` | Пропуска | [role-vladelec.md](../ru/role-vladelec.md#propuska) |
+| `access-gate-qr.png` | Регистрация входа | [role-vladelec.md](../ru/role-vladelec.md#propuska) |
+| `billing-tabs.png` | Коммуналка и счётчики | [role-vladelec.md](../ru/role-vladelec.md#kommunalka) |
+| `finance-turnover.png` | Сводная ведомость | [role-vladelec.md](../ru/role-vladelec.md#finansy) |
+| `sublease-workspace.png` | Субаренда | [role-vladelec.md](../ru/role-vladelec.md#subarenda) |
+| `export-1c.png` | Экспорт 1С | [role-vladelec.md](../ru/role-vladelec.md#finansy) |
+| `admin-work.png` | График работы | [role-vladelec.md](../ru/role-vladelec.md#kadry) |
+| `news-admin.png` | Новости студии | [role-vladelec.md](../ru/role-vladelec.md#novosti-i-zayavki) |
+| `join-requests.png` | Заявки | [role-vladelec.md](../ru/role-vladelec.md#novosti-i-zayavki) |
+| `me-home.png` | Личная главная | [role-uchenik.md](../ru/role-uchenik.md#kabinet-i-menyu) |
+| `settings-org.png` | Настройки | [role-vladelec.md](../ru/role-vladelec.md#nastroiki) |
+| `privacy.png` | Профиль и приватность | [role-vladelec.md](../ru/role-vladelec.md#nastroiki) |
+| `feedback.png` | Обратная связь | [role-vladelec.md](../ru/role-vladelec.md#obratnaya-svyaz) |
+| `platform-admin.png` | Платформа | [role-super-admin.md](../ru/role-super-admin.md#platforma) |
 
 ## Как обновить снимки
 
@@ -55,7 +55,7 @@ npm run capture:user-guide-screenshots
 
 Для `schedule-modal-attendance.png` нужна **сохранённая** запись типа **«Занятие»**: откройте её в расписании → вкладка **«Факт посещаемости»**.
 
-Для `platform-admin.png` — учётка **SUPER_ADMIN** или **SUPER_USER** (`/go/platform`). Желательно обновить снимок после появления вкладок **«Тарифы»**, **«Рассылки»** и **«Заявки»** (май 2026).
+Для `platform-admin.png` — учётка **SUPER_ADMIN** или **SUPER_USER** (`/go/platform`).
 
 В Markdown:
 
