@@ -5,86 +5,48 @@
 
 **Контуры**
 
-| Контур | Как запускается |
-|--------|-----------------|
-| integration-manual | `npm run test:e2e:integration` (`e2e/manual/`) |
-| chromium + seed | тот же seed, но **не** в оркестраторе — отдельный `npx playwright test … --project=chromium` |
-| smoke | `test:e2e` с `E2E_INTEGRATION=0`, mock/статика, backend не нужен |
+| Контур | Project | Как запускается |
+|--------|---------|-----------------|
+| **integration** | `integration` | `npm run test:e2e:integration` — seed → все `e2e/integration/**` → cleanup |
+| **smoke** | `smoke` | `CI=true E2E_INTEGRATION=0 npm run test:e2e -- --project=smoke` — mock/статика, backend не нужен |
 
 **Статус:** `automated` — сценарий доходит до проверки; `partial` — UI/API кусок или skip по условию; `manual` — только руками; `removed` — фичи нет.
 
-Имена тестов `TC-OWN-*` / `TC-GEN-*` / `TC-SA-*` в коде — ярлыки. Канон — колонка **Кейс**.
+Имена тестов в коде используют **канон** `TC-OWNER-*`, `TC-INSTRUCTOR-*` и т.д. из `cases/role-*.md`.
 
-## Integration-manual (`e2e/manual/`)
+## Integration (`e2e/integration/`)
 
-| Кейс | Spec | Тест (ярлык в коде) | Статус |
-|------|------|---------------------|--------|
-| TC-ANON-LOGIN-03 | `manual/auth-from-manual.spec.ts` | TC-GEN-001 | automated |
-| TC-ANON-LOGIN-01 | `manual/auth-from-manual.spec.ts` | TC-GEN-002 | automated |
-| TC-ANON-REG-01 | `manual/auth-from-manual.spec.ts` | TC-GEN-003 | automated (`E2E_ALLOW_REGISTRATION`) |
-| TC-ANON-VERIFY-05 | `manual/auth-from-manual.spec.ts` | TC-GEN-003A | partial (skip если guard выключен / email уже verified) |
-| TC-ANON-JOIN-INS-01 | `manual/auth-from-manual.spec.ts` | TC-GEN-004 | automated |
-| TC-ANON-JOIN-STU-01 | `manual/auth-from-manual.spec.ts` | TC-GEN-005 | automated (нужен seed-предмет) |
-| — | `manual/layout-menu-from-guide.spec.ts` | OWNER меню гл.01 | automated |
-| TC-SUPERADMIN-TENANTS-01 | `manual/platform-from-manual.spec.ts` | TC-SA-001…008 | automated (006 destructive) |
-| TC-SUPERADMIN-PLANS-* | `manual/platform-plans-from-manual.spec.ts` | TC-SA-009…021 | automated; 019 skip без ARCHIVED |
-| TC-SUPERADMIN-SUBS-* | `manual/platform-org-subscriptions-from-manual.spec.ts` | TC-SA-020, 023, 024 | automated |
-| TC-OWNER-SET-ORG-01 | `manual/owner-settings.spec.ts` | TC-OWN-001 | automated |
-| TC-OWNER-SET-PUB-01 | `manual/owner-settings.spec.ts` | TC-OWN-002 | automated |
-| TC-OWNER-SET-ORG (finance flag) | `manual/owner-settings.spec.ts` | TC-OWN-003 | automated |
-| TC-OWNER-USERS-02 | `manual/owner-settings.spec.ts` | TC-OWN-004 | partial (UI invite, без письма) |
-| TC-OWNER-USERS-02 | `manual/owner-settings.spec.ts` | TC-OWN-005 | partial (smoke instructor) |
-| TC-OWNER-SUBJ-02 / 04 | `manual/owner-schedule-from-manual.spec.ts` | TC-OWN-007 | automated |
-| TC-OWNER-PREM-02 + HALL-01 | `manual/owner-schedule-from-manual.spec.ts` | TC-OWN-008 | automated |
-| TC-OWNER-SCHED-02 / 06 | `manual/owner-schedule-from-manual.spec.ts` | TC-OWN-009 | automated |
-| TC-OWNER-SCHED-01 | `manual/owner-schedule-from-manual.spec.ts` | TC-OWN-009b | automated (вечерний слот) |
-| TC-OWNER-SCHED-08 | `manual/owner-schedule-from-manual.spec.ts` | TC-OWN-010 | automated |
-| TC-OWNER-PREM-02 | `manual/premise-hall-manual.spec.ts` | UI создание помещения | automated |
-| TC-OWNER-HALL-01 | `manual/premise-hall-manual.spec.ts` | UI создание зала | automated |
-| TC-OWNER-SUBJ-03A | `manual/entity-content-manual.spec.ts` | HTML предмета | automated |
-| TC-ANON-TEACHERS-01 | `manual/entity-content-manual.spec.ts` | публичное био | automated |
-| TC-OWNER-PREM-02A | `manual/entity-content-manual.spec.ts` | HTML помещения smoke | partial |
-| TC-OWNER-JOIN-02 / 03 | `manual/owner-operations.spec.ts` | TC-OWN-006 | automated |
-| TC-OWNER-ACCESS-01 / 02 | `manual/owner-operations.spec.ts` | TC-OWN-011 | automated |
-| TC-OWNER-ACCESS-08 | `manual/owner-operations.spec.ts` | TC-OWN-012 | automated |
-| TC-OWNER-BILL-01…03 | `manual/owner-operations.spec.ts` | TC-OWN-013 | automated |
-| TC-OWNER-FIN-TURN-05 | `manual/owner-operations.spec.ts` | TC-OWN-014 | automated |
-| TC-OWNER-FIN-CAT / EXP | `manual/owner-operations.spec.ts` | TC-OWN-015 | partial (модалки, без сохранения) |
-| TC-OWNER-SUB-02 | `manual/owner-operations.spec.ts` | TC-OWN-017 | partial (skip без слота / SUB_TENANT) |
-| TC-OWNER-EXPORT-01 | `manual/owner-operations.spec.ts` | TC-OWN-018 | automated |
-| TC-OWNER-NEWS-02 | `manual/owner-operations.spec.ts` | TC-OWN-019 | automated |
-| TC-OWNER-ADMWORK-02 | `manual/owner-operations.spec.ts` | TC-OWN-020 | automated |
-| TC-OWNER-ME-04 | `manual/owner-operations.spec.ts` | TC-OWN-021 | automated |
-| TC-OWNER-FEEDBACK-01 | `manual/owner-operations.spec.ts` | TC-OWN-022 | automated |
-| TC-ADMIN finance flag | `manual/admin.spec.ts` | TC-ADM-001 / 002 | automated (serial) |
-| TC-INSTRUCTOR-SCHED | `manual/instructor.spec.ts` | TC-INS-001…003, 005, 006 | automated; 002/003 зависят от 001 |
-| TC-INSTRUCTOR-SUBJ-02 | `manual/instructor.spec.ts` | TC-INS-004 | **removed/stale** (тарифы V63) |
-| TC-STUDENT-* | `manual/student.spec.ts` | TC-STU-001…005 | automated; 002 skip без слота |
-| TC-SUBTENANT-SUB-02 | `manual/sub-tenant.spec.ts` | TC-SUB-001 | partial (слот) |
-| TC-SUBTENANT-RO-02 | `manual/sub-tenant.spec.ts` | TC-SUB-002 | automated |
-| TC-SUBTENANT export | `manual/sub-tenant.spec.ts` | TC-SUB-003 | automated |
-| TC-SUBTENANT ME | `manual/sub-tenant.spec.ts` | TC-SUB-004 | automated |
-| TC-ANON-PRIVACY-01 | `manual/privacy.spec.ts` | TC-PRV-001 | automated |
-| TC-ANON-PRIVACY-04 | `manual/privacy.spec.ts` | TC-PRV-002 | automated (destructive) |
-| TC-ANON-PRIVACY-03 | `manual/privacy.spec.ts` | TC-PRV-003 | automated |
-| TC-OWNER-ACCESS-06 | `manual/passage-navigation.spec.ts` | Проходная / регистрация входа | automated |
-| TC-OWNER-FIN / SUB UI | `manual/finance-income-subroutes.spec.ts` | income subroutes | automated |
-| TC-SUPERADMIN-ETR-01 / 02 | `manual/etracker.spec.ts` | issue + like/subscribe | automated (SUPER_ADMIN) |
+| Spec | Кейсы (канон) | Статус |
+|------|---------------|--------|
+| `role-anonymous.spec.ts` | TC-ANON-LOGIN-03, LOGIN-01, REG-01, VERIFY-05, JOIN-INS-01, JOIN-STU-01 | automated |
+| `role-anonymous-privacy.spec.ts` | TC-ANON-PRIVACY-01, 04, 03 | automated (04 destructive) |
+| `role-owner-nav.spec.ts` | меню OWNER (layout) | automated |
+| `role-owner-settings.spec.ts` | TC-OWNER-SET-ORG-01, SET-PUB-01, SET-ORG, USERS-02 | automated / partial |
+| `role-owner-schedule.spec.ts` | TC-OWNER-SUBJ-02, PREM-02+HALL-01, SCHED-02, SCHED-01, SCHED-08 | automated |
+| `role-owner-premises.spec.ts` | TC-OWNER-PREM-02, HALL-01 | automated |
+| `role-owner-entity-content.spec.ts` | TC-OWNER-SUBJ-03A, TC-ANON-TEACHERS-01, PREM-02A | automated / partial |
+| `role-owner-operations.spec.ts` | TC-OWNER-JOIN-02, ACCESS-01/02/08, BILL-01, FIN-TURN-05, FIN-CAT, SUB-02, EXPORT-01, NEWS-02, ADMWORK-02, ME-04, FEEDBACK-01 | automated / partial |
+| `role-owner-passage.spec.ts` | TC-OWNER-ACCESS-06 | automated |
+| `role-owner-finance.spec.ts` | income subroutes UI | automated |
+| `role-admin.spec.ts` | TC-ADMIN-FIN-FLAG-01, 03 | automated (serial) |
+| `role-instructor.spec.ts` | TC-INSTRUCTOR-SCHED-01…03, ACCESS-01, ME-02, SUBJ-01 | automated (serial) |
+| `role-student.spec.ts` | TC-STUDENT-RO-02, ACCESS-01, ME-02, RO-06 | automated |
+| `role-sub-tenant.spec.ts` | TC-SUBTENANT-SUB-02, RO-02, RO-05, ME-01 | automated / partial |
+| `role-cleaner.spec.ts` | TC-CLEANER-NAV-01/02, DASH-01, ACCESS-01 | automated |
+| `role-super-admin-platform.spec.ts` | TC-SUPERADMIN-DASH-01…05, TENANTS-01, FB-01, ACCESS-01, FEEDBACK-01 | automated (006 destructive) |
+| `role-super-admin-plans.spec.ts` | TC-SUPERADMIN-PLANS-01…07 | automated |
+| `role-super-admin-subscriptions.spec.ts` | TC-SUPERADMIN-SUBS-02, 03 | automated |
+| `role-super-admin-etracker.spec.ts` | TC-SUPERADMIN-ETR-01, 02 | automated |
+| `role-super-user.spec.ts` | TC-SUPERUSER-OPS-01…03 | automated |
+| `entity-content.api.spec.ts` | TC-OWNER-SUBJ-03A/03B, TC-ANON-TEACHERS-01 | automated |
+| `staff-invite.api.spec.ts` | TC-OWNER-USERS-02A/02B/02C | partial (SMTP) |
+| `premise-hall.api.spec.ts` | TC-OWNER-HALL-05…08, PREM-04/05, ACCESS-01 | automated |
+| `schedule-entry-overnight.api.spec.ts` | overnight RENT | automated |
+| `chats/support-chat.spec.ts` | TC-OWNER-FEEDBACK / platform feedback | automated |
+| `chats/tenant-chat.spec.ts` | tenant ↔ platform chat | automated |
+| `chats/platform-chat.spec.ts` | platform operator chat | automated |
 
-## Chromium + seed (не в оркестраторе)
-
-Нужны `E2E_INTEGRATION=1` и `.env.e2e`. Команды — в [run.md](run.md).
-
-| Кейс | Spec | Статус |
-|------|------|--------|
-| TC-OWNER-SUBJ-03A / 03B, TC-ANON-TEACHERS-01 | `entity-content.spec.ts` | automated (**оркестратор запускает**) |
-| TC-OWNER-HALL-05…08, PREM-04/05, ACCESS-01 | `premise-hall.spec.ts` | automated (API) |
-| TC-OWNER-SCHED overnight RENT | `schedule-entry-overnight.spec.ts` | automated |
-| TC-OWNER-USERS-02 / 02A / 02B | `staff-invite.spec.ts` | partial API; skip при SMTP 502 |
-| TC-OWNER-FEEDBACK / platform chats | `support-chat.spec.ts`, `tenant-chat.spec.ts`, `platform-chat.spec.ts` | automated |
-| — | `capture-user-guide-screenshots.spec.ts` | отдельный конфиг, не E2E-регресс |
-
-## Smoke (без backend)
+## Smoke (`e2e/smoke/`)
 
 | Spec | Что проверяет | Статус |
 |------|---------------|--------|
@@ -96,19 +58,24 @@
 | `seo.smoke.spec.ts` | OG/canonical | skip без seed |
 | `finance-manage.smoke.spec.ts` | редирект на login (categories/expenses) | automated |
 | `finance-pages.smoke.spec.ts` | shell finance | automated |
-| `finance-turnover.spec.ts` | mock таблицы оборота | known fail (strict «Абонементы») |
+| `finance-turnover.spec.ts` | mock таблицы оборота | automated |
 | `access-pass-payment.spec.ts` | mock оплата/refund | automated |
 | `etracker.smoke.spec.ts` | mock списка/карточки | automated |
+
+## Вне оркестратора
+
+| Spec | Комментарий |
+|------|-------------|
+| `e2e/capture-user-guide-screenshots.spec.ts` | отдельный `playwright.user-guide.config.ts`, не регресс |
 
 ## Нет E2E / только руки
 
 | Кейс | Комментарий |
 |------|-------------|
-| TC-CLEANER-* | нет спека |
-| TC-SUPERUSER-* | нет спека (только SUPER_ADMIN) |
+| TC-CLEANER-SCAN-*, REQ-* | QR-станция / заявки — partial или manual |
 | TC-SUPERADMIN-BC-SMTP-01 | реальный SMTP, пилот |
 | TC-OWNER-USERS-02 первый вход + смена пароля | UI manual |
-| TC-OWNER-FIN-CAT-02 / EXP-02 сохранение | 015 только модалки |
+| TC-OWNER-FIN-CAT-02 / EXP-02 сохранение | FIN-CAT только модалки |
 | PassAllocation, utility rebill, tickets как оборот | нет |
 | RLS / чужой tenant | CONV-TENANT-ISOLATION, нет спека |
 
@@ -116,22 +83,11 @@
 
 | Было | Почему |
 |------|--------|
-| `finance-tariff-charges.spec.ts`, TC-OWN-016, `recalcTariffCharges` | V63, поурочные тарифы сняты |
+| `finance-tariff-charges.spec.ts`, TC-OWNER-FIN-TURN-016, `recalcTariffCharges` | V63, поурочные тарифы сняты |
 | `catalog.spec.ts` + `generated/qa-catalog.json` + xlsx | мёртвый контур |
-| Selenium `backend/e2e-selenium` | уже удалён |
+| `e2e/manual/` + project `integration-manual` | заменено на `e2e/integration/` + project `integration` |
+| TC-INSTRUCTOR-SUBJ-02 (тарифы) | V63 |
 
-## Бывший ярлык → канон (фрагмент)
+## Исторические ярлыки в коде (до рефакторинга 2026-08)
 
-| Ярлык в spec | Канон |
-|--------------|--------|
-| TC-GEN-001…005 | TC-ANON-LOGIN / REG / JOIN |
-| TC-OWN-001 / 002 | TC-OWNER-SET-ORG-01 / SET-PUB-01 |
-| TC-OWN-004 / 004B / 004C | TC-OWNER-USERS-02 / 02A / 02B |
-| TC-OWN-007 | TC-OWNER-SUBJ-02 |
-| TC-OWN-011 | TC-OWNER-ACCESS-01 / 02 |
-| TC-OWN-014 | TC-OWNER-FIN-TURN-05 |
-| TC-OWN-016 | **removed** |
-| TC-SA-001…008 | TC-SUPERADMIN-* |
-| TC-SA-025 | TC-SUPERADMIN-BC-SMTP-01 |
-| TC-ETR-001…003 | TC-SUPERADMIN-ETR-01…03 |
-| TC-INS-004 | **removed** (V63) |
+Раньше в `test('…')` использовались `TC-OWN-*`, `TC-INS-*`, `TC-GEN-*`, `TC-SA-*` и т.д. Канон — колонка «Кейс» в таблицах выше и файлы `cases/role-*.md`.

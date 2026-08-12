@@ -5,14 +5,16 @@
 
 ## Два режима
 
-| Режим | Команда | Backend | Что бежит |
-|-------|---------|---------|-----------|
-| **Integration** (основной) | `cd frontend && npm run test:e2e:integration` | `:8080` + Vite `:5173` | seed → `entity-content.spec.ts` → `e2e/manual/` → cleanup |
-| **Smoke** | `CI=true`, `E2E_INTEGRATION=0`, `npm run build`, `npm run test:e2e` | не нужен | project `chromium`, `manual/` skip |
+| Режим | Команда | Backend | Project |
+|-------|---------|---------|---------|
+| **Integration** (основной) | `cd frontend && npm run test:e2e:integration` | `:8080` + Vite `:5173` | `integration` |
+| **Smoke** | `CI=true`, `E2E_INTEGRATION=0`, `npm run build`, `npm run test:e2e -- --project=smoke` | не нужен | `smoke` |
 
-Smoke **не** замена integration. `npm run test:e2e` без `E2E_INTEGRATION=0` подтягивает старый `.env.e2e` и валит manual.
+Smoke **не** замена integration. `npm run test:e2e` без `--project=smoke` и без `E2E_INTEGRATION=0` подтянет integration-спеки и потребует seed.
 
-Оркестратор **не** запускает: `staff-invite.spec.ts`, `premise-hall.spec.ts`, overnight, чаты. Их список — в [coverage.md](coverage.md) (контур «chromium + seed»).
+Оркестратор `scripts/qa/run_e2e_integration.py`: cleanup → seed → `npx playwright test --project=integration --workers=1` → cleanup.
+
+Покрытие spec ↔ кейс: [coverage.md](coverage.md).
 
 ## Preflight (перед integration)
 
@@ -52,7 +54,7 @@ cd frontend
 npm run test:e2e:integration
 ```
 
-`scripts/qa/run_e2e_integration.py`: cleanup → пароль SUPER_ADMIN = `TestPass12` → seed → Playwright → cleanup + восстановление hash SUPER_ADMIN.
+`scripts/qa/run_e2e_integration.py`: cleanup → пароль SUPER_ADMIN = `TestPass12` → seed (OWNER…CLEANER, SUPER_USER) → Playwright project `integration` → cleanup + восстановление hash SUPER_ADMIN.
 
 Seed пишет `frontend/.env.e2e`. Протухший файл → `Login API failed: 401`.
 
@@ -64,7 +66,9 @@ Seed пишет `frontend/.env.e2e`. Протухший файл → `Login API 
 python scripts/qa/seed_e2e_fixtures.py `
   --api-base http://127.0.0.1:8080/api `
   --db-url postgresql://myway:myway@127.0.0.1:5432/myway `
-  --write-env frontend/.env.e2e
+  --write-env frontend/.env.e2e `
+  --super-admin-email you@example.com `
+  --super-admin-password TestPass12
 ```
 
 Только Playwright после seed:
@@ -73,14 +77,7 @@ python scripts/qa/seed_e2e_fixtures.py `
 cd frontend
 $env:E2E_INTEGRATION="1"
 $env:PLAYWRIGHT_SKIP_WEBSERVER="1"
-npx playwright test --project=integration-manual --workers=1
-```
-
-Дополнительно (тот же `.env.e2e`):
-
-```powershell
-npx playwright test staff-invite.spec.ts premise-hall.spec.ts schedule-entry-overnight.spec.ts --project=chromium --workers=1
-npx playwright test support-chat.spec.ts tenant-chat.spec.ts platform-chat.spec.ts --project=chromium --workers=1
+npx playwright test --project=integration --workers=1
 ```
 
 ## Smoke (без backend)
@@ -90,20 +87,18 @@ cd frontend
 $env:CI = "true"
 $env:E2E_INTEGRATION = "0"
 npm run build
-npm run test:e2e
+npm run test:e2e -- --project=smoke
 ```
-
-Известный дефект: `finance-turnover.spec.ts` (strict mode, несколько «Абонементы»).
 
 ## Переменные
 
 | Переменная | Назначение |
 |------------|------------|
-| `E2E_INTEGRATION` | `1` — включить `e2e/manual/` и integration-спеки |
+| `E2E_INTEGRATION` | `1` — включить integration-спеки |
 | `E2E_BASE_URL` | SPA, обычно `http://127.0.0.1:5173` |
 | `E2E_API_BASE` | API, по умолчанию `http://127.0.0.1:8080/api` |
 | `E2E_TENANT_SLUG` | slug seed-студии |
-| `E2E_USER_*_EMAIL` / `PASSWORD` | OWNER, ADMIN, INSTRUCTOR, STUDENT, SUB_TENANT, SUPER_ADMIN |
+| `E2E_USER_*_EMAIL` / `PASSWORD` | OWNER, ADMIN, INSTRUCTOR, STUDENT, SUB_TENANT, CLEANER, SUPER_USER, SUPER_ADMIN |
 | `E2E_ALLOW_REGISTRATION` | по умолчанию `1` при integration (регистрация студии) |
 | `E2E_ALLOW_DESTRUCTIVE` | по умолчанию `1` (блокировка тенанта, удаление аккаунта) |
 | `E2E_SKIP_CLEANUP` | `1` — не чистить данные после прогона |
@@ -124,6 +119,6 @@ Cleanup: org `e2e-*` / `pwe2e*`, пользователи `@example.com` с пр
 | `POST …/invite -> 502` | SMTP (aiosmtpd + `--args`) |
 | `join` timeout 60 s | SMTP не слушает порт |
 | integration **skipped** | нет `E2E_INTEGRATION=1` |
-| 68 failed + manual | `test:e2e` без `E2E_INTEGRATION=0` |
+| много failed + integration без seed | `test:e2e` без `--project=smoke` и без integration preflight |
 
 Отчёт: `frontend/playwright-report/index.html`.
