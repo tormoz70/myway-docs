@@ -28,9 +28,10 @@ python -m aiosmtpd -n -l 127.0.0.1:2525
 
 Порт **2525** (на Windows 1025 часто нужен admin). `python -m smtpd` в Python 3.12+ нет.
 
-Backend с перебитой почтой (не Timeweb из `compose.env`):
+Backend с перебитой почтой (не Timeweb из `compose.env`). Перед integration отключите rate limit на login:
 
 ```powershell
+$env:APP_AUTH_RATE_LIMIT_ENABLED = "false"
 cd backend
 .\gradlew.bat :myway-api:bootRun --no-daemon --args="--spring.mail.host=127.0.0.1 --spring.mail.port=2525 --spring.mail.properties.mail.smtp.auth=false --spring.mail.properties.mail.smtp.ssl.enable=false --spring.mail.properties.mail.smtp.starttls.enable=false"
 ```
@@ -118,6 +119,7 @@ Cleanup: org `e2e-*` / `pwe2e*`, пользователи `@example.com` с пр
 | `POST /auth/register -> 500` | Битый backend |
 | `POST …/invite -> 502` | SMTP (aiosmtpd + `--args`) |
 | `join` timeout 60 s | SMTP не слушает порт |
+| `Login API failed: 429` | rate limit — `APP_AUTH_RATE_LIMIT_ENABLED=false` на backend |
 | integration **skipped** | нет `E2E_INTEGRATION=1` |
 | много failed + integration без seed | `test:e2e` без `--project=smoke` и без integration preflight |
 
