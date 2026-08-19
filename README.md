@@ -7,7 +7,7 @@
 | Каталог | Назначение |
 |---------|------------|
 | [`user-guides/`](user-guides/) | Руководства пользователя (RU), скриншоты UI |
-| [`manual-testing/`](manual-testing/) | Тест-кейсы по ролям, E2E seed, каталог и матрица Playwright |
+| [`manual-testing/`](manual-testing/) | Тест-кейсы по ролям, прогон стенда (`manual-stand-role-scenarios.md`), E2E seed, матрица Playwright |
 
 ## Локальная разработка
 
