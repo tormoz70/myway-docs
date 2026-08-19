@@ -1,33 +1,24 @@
 # MyWay — документация
 
-Отдельный репозиторий для материалов, которые можно открыть без доступа к коду продукта ([myway](https://github.com/tormoz70/myway)).
+Отдельный репозиторий для материалов без доступа к коду продукта ([myway](https://github.com/tormoz70/myway)).
 
 ## Содержимое
 
 | Каталог | Назначение |
 |---------|------------|
 | [`user-guides/`](user-guides/) | Руководства пользователя (RU), скриншоты UI |
-| [`manual-testing/`](manual-testing/) | Тест-кейсы по ролям, прогон стенда (`manual-stand-role-scenarios.md`), E2E seed, матрица Playwright |
+| [`qa/`](qa/) | Ручные кейсы по ролям, запуск E2E, покрытие Playwright, каталог use case |
+| [`manual-testing/`](manual-testing/) | Прогон стенда по ролям (`manual-stand-role-scenarios.md`); остальное в `qa/` |
 
 ## Локальная разработка
-
-Клонируйте рядом с основным репозиторием:
 
 ```text
 C:\data\prjs\myway\          # приложение
 C:\data\prjs\myway-docs\     # эта документация
 ```
 
-Скриншоты для руководств снимаются из **myway** (нужны backend :8080 и Vite :5173):
+Скриншоты: из **myway** (`cd frontend && npm run capture:user-guide-screenshots`) → `user-guides/assets/`.
 
-```bash
-cd myway/frontend
-npm run capture:user-guide-screenshots
-```
-
-Файлы попадают в `myway-docs/user-guides/assets/`.
-
-## Связь с кодом
-
-- E2E и manual-спеки в `myway/frontend/e2e/` ссылаются на `manual-testing/test-cases-by-role.md` здесь.
-- Excel-реестр кейсов (если используется) может жить в `myway/docs/qa/` — см. `myway/scripts/generate_manual_testcases_xlsx.py`.
+E2E: [qa/run.md](qa/run.md). Кейсы: [qa/cases/](qa/cases/). Покрытие: [qa/coverage.md](qa/coverage.md).
+Прогон стенда: [manual-testing/manual-stand-role-scenarios.md](manual-testing/manual-stand-role-scenarios.md).
+Use case'ы отрасли: [qa/use-cases/](qa/use-cases/).

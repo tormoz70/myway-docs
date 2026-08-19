@@ -1,7 +1,7 @@
 # Сценарии ручного теста по ролям (локальный стенд)
 
 Практический прогон **всех ролей** на данных `scripts/qa/seed_manual_test_stand.py`.  
-Подробные кейсы с полями форм — в [test-cases-by-role.md](test-cases-by-role.md). Руководства: `user-guides/ru/role-*.md`.
+Подробные кейсы с полями форм — в [qa/cases/](../qa/cases/). Руководства: `user-guides/ru/role-*.md`.
 
 **Пароль у всех:** `ManualQa12!`  
 **Стенд:** http://127.0.0.1:5173  
