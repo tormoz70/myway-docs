@@ -45,6 +45,7 @@
 | `chats/support-chat.spec.ts` | TC-OWNER-FEEDBACK / platform feedback | automated |
 | `chats/tenant-chat.spec.ts` | tenant ↔ platform chat | automated |
 | `chats/platform-chat.spec.ts` | platform operator chat | automated |
+| `stage2-gap.spec.ts` | TC-ADMIN-MAKEUP-01, TC-OWNER-FUNNEL-01, TC-ADMIN-SUB-01, TC-INSTRUCTOR-SUB-01, TC-STUDENT-FAMILY-01, TC-OWNER-FAMILY-02 | automated / partial |
 
 ## Smoke (`e2e/smoke/`)
 
