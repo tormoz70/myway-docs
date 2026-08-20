@@ -417,6 +417,6 @@ ID и описание — **язык студии**, без экранов MyWa
 | Месяц | OWNER-05; TEACHER-04; CLIENT-03; PARENT-02; RENTER-03,05 |
 | Редко | OWNER-02–04; UC-PARENT-01,03–04; RENTER-04; CLEANER-02 |
 
-**Всего:** 42 use case'ов.
+**Всего:** 46 use case'ов.
 
 Сверка с MyWay — [myway-gap.md](./myway-gap.md).
