@@ -3,11 +3,12 @@
 Единственная инструкция по прогону. Команды — из корня **myway**, если не сказано иначе.
 Шаблон переменных: `myway/.env.e2e.example` → `frontend/.env.e2e` (в `.gitignore`).
 
-## Два режима
+## Режимы
 
 | Режим | Команда | Backend | Project |
 |-------|---------|---------|---------|
 | **Integration** (основной) | `cd frontend && npm run test:e2e:integration` | `:8080` + Vite `:5173` | `integration` |
+| **Simulator** (ручной стенд UC) | `cd frontend && npm run test:e2e:simulator` | `:8080` + Vite `:5173` + `manual-test-stand.json` | `simulator` |
 | **Smoke** | `CI=true`, `E2E_INTEGRATION=0`, `npm run build`, `npm run test:e2e -- --project=smoke` | не нужен | `smoke` |
 
 Smoke **не** замена integration. `npm run test:e2e` без `--project=smoke` и без `E2E_INTEGRATION=0` подтянет integration-спеки и потребует seed.
@@ -81,6 +82,18 @@ $env:PLAYWRIGHT_SKIP_WEBSERVER="1"
 npx playwright test --project=integration --workers=1
 ```
 
+## Simulator (ручной стенд UC)
+
+Отдельный контур: `generated/manual-test-stand.json`, **без** cleanup integration.
+
+```powershell
+python scripts/qa/seed_manual_test_stand.py --simulator-fixtures-only
+cd frontend
+npm run test:e2e:simulator
+```
+
+Подробнее: [use-cases/simulator.md](use-cases/simulator.md).
+
 ## Smoke (без backend)
 
 ```powershell
@@ -96,6 +109,8 @@ npm run test:e2e -- --project=smoke
 | Переменная | Назначение |
 |------------|------------|
 | `E2E_INTEGRATION` | `1` — включить integration-спеки |
+| `E2E_SIMULATOR` | `1` — project simulator (ставит оркестратор `run_e2e_simulator.py`) |
+| `E2E_MANUAL_STAND_JSON` | путь к `generated/manual-test-stand.json` |
 | `E2E_BASE_URL` | SPA, обычно `http://127.0.0.1:5173` |
 | `E2E_API_BASE` | API, по умолчанию `http://127.0.0.1:8080/api` |
 | `E2E_TENANT_SLUG` | slug seed-студии |

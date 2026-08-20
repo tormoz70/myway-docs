@@ -221,20 +221,20 @@ Stage 2 закрыл **ядро** четырёх отраслевых болей
 
 ## Покрытие manual test stand
 
-Скрипт `seed_manual_test_stand.py` **не** цель этого этапа; ориентировочно:
+После `manual_stand_simulator.py` (или `--simulator-fixtures`):
 
-| UC cluster | Данные на стенде |
-|------------|------------------|
+| UC cluster | Данные на стенде (ritm-hall) |
+|------------|------------------------------|
 | OWNER/ADMIN расписание, пропуска, клиенты | Да |
 | SUB_TENANT субаренда | Да (3 студии, sublease) |
 | Финансы / оборот | Да (`manual_stand_lifecycle.py` finance seed) |
-| Waitlist | Нужны переполненные группы — **не по умолчанию** |
-| Лиды / воронка | **Нет** в seed (страница «Воронка» в продукте есть) |
-| Родитель / несколько детей | **Нет** в seed (`family_accounts` в продукте есть) |
-| Отработка / замена преподавателя | **Нет** гарантированных кейсов в seed |
+| Waitlist | Да — `Sim UC Waitlist`, capacity=1, seed waitlist |
+| Лиды / воронка | Да — inquiry → `sales_pipeline_items` |
+| Родитель / ребёнок | Да — guardian `student.ritm` + «Алиса Симулятор» |
+| Отработка / замена преподавателя | Да — NO_SHOW + класс substitute +7 д |
 | Касса / смена | **Нет** |
 
-Подробные сценарии ролей: [manual-stand-role-scenarios.md](../manual-testing/manual-stand-role-scenarios.md).
+Playwright UC: [simulator.md](./simulator.md). Подробные сценарии ролей: [manual-stand-role-scenarios.md](../manual-testing/manual-stand-role-scenarios.md).
 
 ---
 
@@ -242,5 +242,5 @@ Stage 2 закрыл **ядро** четырёх отраслевых болей
 
 1. Согласовать Must: касса и ЛК заработка преподавателя — в продукт или сознательно «вне» (ККТ / Excel).
 2. Каталог: поправить «Всего: 42» → **46**.
-3. Симулятор Playwright / soak — **отдельный план**, после стабилизации этого gap.
-4. Наполнение стенда (воронка, семья, отработка) — только если симулятор/ручной прогон это потребует.
+3. Soak API — `scripts/qa/soak_studio_simulator.py` (не CI); разгон нагрузки после стабильных UC-сценариев.
+4. Наполнение стенда — `manual_stand_simulator.py` / `--simulator-fixtures-only`.

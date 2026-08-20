@@ -8,6 +8,7 @@
 | Контур | Project | Как запускается |
 |--------|---------|-----------------|
 | **integration** | `integration` | `npm run test:e2e:integration` — seed → все `e2e/integration/**` → cleanup |
+| **simulator** | `simulator` | `npm run test:e2e:simulator` — ручной стенд UC, без cleanup |
 | **smoke** | `smoke` | `CI=true E2E_INTEGRATION=0 npm run test:e2e -- --project=smoke` — mock/статика, backend не нужен |
 
 **Статус:** `automated` — сценарий доходит до проверки; `partial` — UI/API кусок или skip по условию; `manual` — только руками; `removed` — фичи нет.
@@ -46,6 +47,18 @@
 | `chats/tenant-chat.spec.ts` | tenant ↔ platform chat | automated |
 | `chats/platform-chat.spec.ts` | platform operator chat | automated |
 | `stage2-gap.spec.ts` | TC-ADMIN-MAKEUP-01, TC-OWNER-FUNNEL-01, TC-ADMIN-SUB-01, TC-INSTRUCTOR-SUB-01, TC-STUDENT-FAMILY-01, TC-OWNER-FAMILY-02 | automated / partial |
+
+## Simulator (`e2e/simulator/`)
+
+Ручной стенд, UC-каталог. Запуск: [use-cases/simulator.md](use-cases/simulator.md).
+
+| Spec | UC | Статус |
+|------|-----|--------|
+| `uc-owner-admin.spec.ts` | UC-OWNER-01, UC-FRONTDESK-09, UC-SALES-02, UC-OWNER-04 | automated / partial |
+| `uc-frontdesk.spec.ts` | UC-FRONTDESK-03…06, 11, 12 | automated |
+| `uc-teacher-student.spec.ts` | UC-TEACHER-01…03, UC-CLIENT-01/02/04, UC-PARENT-02 | automated / partial |
+| `uc-renter.spec.ts` | UC-RENTER-01/02/05 | automated / partial |
+| `uc-isolation.spec.ts` | tenant isolation flow-street ↔ ritm-hall | automated |
 
 ## Smoke (`e2e/smoke/`)
 
