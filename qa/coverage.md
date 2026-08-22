@@ -31,7 +31,7 @@
 | `role-owner-finance.spec.ts` | income subroutes UI | automated |
 | `role-admin.spec.ts` | TC-ADMIN-FIN-FLAG-01, 03 | automated (serial) |
 | `role-instructor.spec.ts` | TC-INSTRUCTOR-SCHED-01…03, ACCESS-01, ME-02, SUBJ-01 | automated (serial) |
-| `role-student.spec.ts` | TC-STUDENT-RO-02, ACCESS-01, ME-02, RO-06 | automated |
+| `role-student.spec.ts` | TC-STUDENT-RO-02, ACCESS-01, ME-02 (своё занятие недели), RO-06 | automated |
 | `role-sub-tenant.spec.ts` | TC-SUBTENANT-SUB-02, RO-02, RO-05, ME-01 | automated / partial |
 | `role-cleaner.spec.ts` | TC-CLEANER-NAV-01/02, DASH-01, ACCESS-01 | automated |
 | `role-super-admin-platform.spec.ts` | TC-SUPERADMIN-DASH-01…05, TENANTS-01, FB-01, ACCESS-01, FEEDBACK-01 | automated (006 destructive) |
@@ -46,7 +46,8 @@
 | `chats/support-chat.spec.ts` | TC-OWNER-FEEDBACK / platform feedback | automated |
 | `chats/tenant-chat.spec.ts` | tenant ↔ platform chat | automated |
 | `chats/platform-chat.spec.ts` | platform operator chat | automated |
-| `stage2-gap.spec.ts` | TC-ADMIN-MAKEUP-01, TC-OWNER-FUNNEL-01, TC-ADMIN-SUB-01, TC-INSTRUCTOR-SUB-01, TC-STUDENT-FAMILY-01, TC-OWNER-FAMILY-02 | automated / partial |
+| `stage2-gap.spec.ts` | TC-ADMIN-MAKEUP-01, TC-OWNER-FUNNEL-01 (+ FUNNEL-03), TC-ADMIN-SUB-01, TC-INSTRUCTOR-SUB-01, TC-STUDENT-FAMILY-01, TC-OWNER-FAMILY-02 | automated / partial |
+| `capture-user-guide-screenshots.spec.ts` | не кейс: съёмка PNG для `user-guides/assets` | tool |
 
 ## Simulator (`e2e/simulator/`)
 
@@ -63,9 +64,12 @@
 | `uc-renter.spec.ts` | UC-RENTER-01/02/05 | automated (serial) |
 | `uc-isolation.spec.ts` | tenant isolation flow-street ↔ ritm-hall | automated |
 
-Дубли с integration: `UC-SALES-02` ≈ `TC-OWNER-FUNNEL-01`, `UC-FRONTDESK-06` ≈ `TC-ADMIN-MAKEUP-01`,
-`UC-PARENT-02` ≈ `TC-STUDENT-FAMILY-01` (`stage2-gap.spec.ts`). Отличие — источник данных: стенд
-против seed. Объединять или нет — не решено.
+Пересечение с integration (`UC-SALES-02` / `TC-OWNER-FUNNEL-01`, `UC-FRONTDESK-06` /
+`TC-ADMIN-MAKEUP-01`, `UC-PARENT-02` / `TC-STUDENT-FAMILY-01`) **оставлено**: контуры гоняются на
+разных данных (стенд против `e2e-seed` с cleanup) и в разных прогонах — симулятор не входит в
+обычный прогон, поэтому удаление integration-проверок сократило бы то, что гоняется всегда.
+Совпадение сведено к теме, а не к тексту проверки: обе стороны опираются на свои данные, а не на
+наличие раздела. Подробнее: [use-cases/simulator.md](use-cases/simulator.md).
 
 ## Smoke (`e2e/smoke/`)
 

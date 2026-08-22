@@ -60,6 +60,22 @@ npm run test:e2e:integration
 
 Seed пишет `frontend/.env.e2e`. Протухший файл → `Login API failed: 401`.
 
+Кроме учёток и каталога seed заводит данные, без которых экраны пусты и проверки сводились
+к заголовку страницы:
+
+| Фикстура | Что создаётся | Где видно |
+|----------|---------------|-----------|
+| Лид воронки | заявка с сайта от «Мария Лидова», `+79005550101`, источник `INQUIRY` | «Воронка», кадр `funnel.png` |
+| Занятие студента | ежедневное занятие с сегодняшнего дня + запись студента на первое будущее вхождение | «Моё расписание», кадр `me-schedule.png` |
+| Пропуск | прошедшее занятие (10 дней назад) + `NO_SHOW` | карточка «Нужна отработка» на главной ADMIN |
+
+Каждый шаг проверяет результат (лид дошёл до воронки, запись попала в `needs-makeup`) и падает
+с понятным текстом. Пропуск требует `--db-url`: `NO_SHOW` ставит только ночной
+`LessonEnrollmentNoShowJob`, поэтому запись пишется в БД, а seed выставляет `E2E_SEED_MAKEUP_READY=1`.
+
+Занятие ежедневное, потому что «Моё расписание» показывает только текущую неделю: одиночная
+запись на фиксированный день недели давала бы «Нет записей на эту неделю» в зависимости от дня прогона.
+
 В `.env.e2e` достаточно email SUPER_ADMIN (`E2E_USER_SUPER_ADMIN_EMAIL`); иначе берётся первый SUPER_ADMIN в БД.
 
 Ручной seed:
@@ -118,7 +134,7 @@ npm run test:e2e -- --project=smoke
 | `E2E_INTEGRATION` | `1` — включить integration-спеки |
 | `E2E_SIMULATOR` | `1` — project simulator (ставит оркестратор `run_e2e_simulator.py`) |
 | `E2E_MANUAL_STAND_JSON` | путь к `generated/manual-test-stand.json` |
-| `E2E_SCHEDULE_TZ` | зона расписания у браузера в project simulator, по умолчанию `Europe/Moscow` |
+| `E2E_SCHEDULE_TZ` | зона расписания у браузера в project `simulator`, `integration` и при съёмке скриншотов, по умолчанию `Europe/Moscow` |
 | `E2E_BASE_URL` | SPA, обычно `http://127.0.0.1:5173` |
 | `E2E_API_BASE` | API, по умолчанию `http://127.0.0.1:8080/api` |
 | `E2E_TENANT_SLUG` | slug seed-студии |
@@ -127,7 +143,9 @@ npm run test:e2e -- --project=smoke
 | `E2E_ALLOW_DESTRUCTIVE` | по умолчанию `1` (блокировка тенанта, удаление аккаунта) |
 | `E2E_SKIP_CLEANUP` | `1` — не чистить данные после прогона |
 | `E2E_SEED_ROOM_NAME` / `E2E_SEED_SUBLEASE_ROOM_NAME` | залы seed |
-| `E2E_SEED_SUBJECT_NAME` | предмет seed |
+| `E2E_SEED_SUBJECT_NAME` | предмет seed (он же подпись занятия) |
+| `E2E_SEED_FUNNEL_CONTACT_NAME` / `_PHONE` | лид воронки из seed |
+| `E2E_SEED_MAKEUP_READY` | `1` — seed завёл пропуск для очереди отработок (нужен `--db-url`) |
 | `PLAYWRIGHT_SKIP_WEBSERVER` | `1` при уже запущенном Vite |
 
 Алиасы `E2E_OWNER_*`, `E2E_ORG_SLUG` ещё читает `helpers/env.ts`.
