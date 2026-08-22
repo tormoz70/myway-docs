@@ -87,12 +87,19 @@ npx playwright test --project=integration --workers=1
 Отдельный контур: `generated/manual-test-stand.json`, **без** cleanup integration.
 
 ```powershell
-python scripts/qa/seed_manual_test_stand.py --simulator-fixtures-only
+# стенд + фикстуры UC на ritm-hall
+python scripts/qa/seed_manual_test_stand.py --simulator-fixtures
 cd frontend
 npm run test:e2e:simulator
 ```
 
-Подробнее: [use-cases/simulator.md](use-cases/simulator.md).
+Фикстуры на уже готовом стенде: `python scripts/qa/manual_stand_simulator.py` (идемпотентно) или
+`seed_manual_test_stand.py --simulator-fixtures-only`.
+
+Preflight оркестратора жёсткий: нет API, Vite, учёток или любой фикстуры — `PREFLIGHT FAILED` и код
+возврата 2. Незасеянный стенд не должен давать зелёный прогон.
+
+Подробнее — фикстуры, спеки ↔ UC, soak: [use-cases/simulator.md](use-cases/simulator.md).
 
 ## Smoke (без backend)
 
@@ -111,6 +118,7 @@ npm run test:e2e -- --project=smoke
 | `E2E_INTEGRATION` | `1` — включить integration-спеки |
 | `E2E_SIMULATOR` | `1` — project simulator (ставит оркестратор `run_e2e_simulator.py`) |
 | `E2E_MANUAL_STAND_JSON` | путь к `generated/manual-test-stand.json` |
+| `E2E_SCHEDULE_TZ` | зона расписания у браузера в project simulator, по умолчанию `Europe/Moscow` |
 | `E2E_BASE_URL` | SPA, обычно `http://127.0.0.1:5173` |
 | `E2E_API_BASE` | API, по умолчанию `http://127.0.0.1:8080/api` |
 | `E2E_TENANT_SLUG` | slug seed-студии |
@@ -137,5 +145,8 @@ Cleanup: org `e2e-*` / `pwe2e*`, пользователи `@example.com` с пр
 | `Login API failed: 429` | rate limit — `APP_AUTH_RATE_LIMIT_ENABLED=false` на backend |
 | integration **skipped** | нет `E2E_INTEGRATION=1` |
 | много failed + integration без seed | `test:e2e` без `--project=smoke` и без integration preflight |
+| simulator: `PREFLIGHT FAILED: нет фикстур` | не запускался `manual_stand_simulator.py` |
+| simulator: `Нет свободного слота для «…»` | залы стенда заняты расписанием — освободить час или пересоздать стенд |
+| simulator **skipped** | нет `E2E_SIMULATOR=1` (его ставит `run_e2e_simulator.py`) |
 
 Отчёт: `frontend/playwright-report/index.html`.
