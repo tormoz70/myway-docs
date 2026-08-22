@@ -6,8 +6,13 @@
 ## Предусловия
 
 1. Dev stack: Postgres/Redis/MinIO, backend `:8080`, Vite `:5173` (skill `run-dev-stack` или `scripts/dev-local.ps1`).
-2. Ручной стенд: `python scripts/qa/seed_manual_test_stand.py` (три студии, `generated/manual-test-stand.json`).
-3. Фикстуры симулятора (только **ritm-hall**):
+2. Ручной стенд **и** фикстуры симулятора одной командой:
+
+```powershell
+python scripts/qa/seed_manual_test_stand.py --simulator-fixtures
+```
+
+Только фикстуры на уже готовом стенде:
 
 ```powershell
 python scripts/qa/manual_stand_simulator.py
@@ -15,7 +20,37 @@ python scripts/qa/manual_stand_simulator.py
 python scripts/qa/seed_manual_test_stand.py --simulator-fixtures-only
 ```
 
-Досев идемпотентный: семья, воронка, waitlist, отработка, класс для замены.
+Досев **не создаёт** `generated/manual-test-stand.json` сам: без стенда он падает с указанием, что
+запустить. Пустой каркас раньше выглядел как готовый стенд, и тесты падали на «Нет учётки OWNER».
+
+Досев идемпотентный: повторный запуск не дублирует фикстуры и не ломается на следующий день.
+
+## Фикстуры (только ritm-hall)
+
+| Фикстура | Что создаётся | Где видно в UI |
+|----------|---------------|----------------|
+| Семья | ребёнок «Алиса Симулятор» у `student.ritm@myway.local` | карточка «Семья» на главной STUDENT |
+| Воронка | заявка с сайта от «Симулятор Лид», `+79005550199` | «Воронка», источник `INQUIRY` |
+| Waitlist | занятие **Sim UC Waitlist** (вместимость 1) + два студента → один в очереди | панель занятия → «Лист ожидания» → `№1` |
+| Отработка | прошедшее занятие **Sim UC Makeup** + запись `NO_SHOW` | карточка «Нужна отработка» на главной ADMIN |
+| Замена | будущее занятие **Sim UC Substitute** + записанный студент | «Факт посещаемости», «Моё расписание» студента |
+
+Что важно знать про досев:
+
+- **У каждой фикстуры свой предмет** (`Sim UC Waitlist`, `Sim UC Makeup`, `Sim UC Substitute`).
+  Название занятия типа CLASS backend берёт из предмета, поэтому на общем предмете плитка
+  фикстуры ничем не отличалась от десятков реальных занятий стенда. Эти три предмета остаются в
+  каталоге стенда — так и задумано.
+- **Слот ищется среди свободных часов** по всем залам: у стенда засеяно ~4 месяца расписания, и
+  фиксированное прайм-тайм окно почти всегда занято (409 «overlaps with an existing booking»).
+- **Запись `NO_SHOW` пишется прямо в БД**, в пределах tenant. API для этого нет: `enroll` отвечает
+  400 «Занятие уже прошло», а `NO_SHOW` ставит только ночной `LessonEnrollmentNoShowJob`.
+- Каждый шаг проверяет результат (очередь непуста, запись попала в `needs-makeup`, лид дошёл до
+  воронки) и падает с понятным текстом, а не оставляет полуготовую фикстуру.
+
+Метаданные фикстур пишутся в `generated/manual-test-stand.json` → секция `simulator`: для каждого
+занятия там лежат `occurrenceStart` и `entryLabel`. Spec'и берут дату и время плитки **оттуда** и
+не хардкодят `18:00` — иначе прогон зависел бы от того, в какой день и в каком слоте нашлось место.
 
 ## Запуск
 
@@ -24,36 +59,75 @@ cd frontend
 npm run test:e2e:simulator
 ```
 
-Оркестратор: `scripts/qa/run_e2e_simulator.py` — preflight API, `E2E_SIMULATOR=1`, project `simulator`, **без** cleanup integration.
+Оркестратор `scripts/qa/run_e2e_simulator.py`: preflight (API `:8080`, Vite `:5173`, фикстуры) →
+`E2E_SIMULATOR=1` → project `simulator` → **без** cleanup integration.
 
 Опции:
 
 ```powershell
-python scripts/qa/run_e2e_simulator.py --seed-simulator-fixtures
-python scripts/qa/run_e2e_simulator.py --skip-playwright
+python scripts/qa/run_e2e_simulator.py --seed-simulator-fixtures   # досеять перед прогоном
+python scripts/qa/run_e2e_simulator.py --skip-playwright           # только preflight
 ```
 
-Учётки и пароль — из `generated/manual-test-stand.json` (`ManualQa12!`), **не** `frontend/.env.e2e`.
+Учётки и пароль — из `generated/manual-test-stand.json` (`ManualQa12!`), **не** `frontend/.env.e2e`:
+в режиме симулятора `global-setup` этот файл не читает.
+
+Зона расписания у браузера прибита к `Europe/Moscow` (project `simulator`), потому что сетка
+рендерит время браузера, а стенд создаёт занятия в зоне расписания backend. Переопределяется
+`E2E_SCHEDULE_TZ`.
+
+## Неготовый стенд — это падение, а не skip
+
+Единственный `skip` симулятора — «запущено не в режиме симулятора». Отсутствие стенда или фикстуры
+раньше тоже было skip, и весь проект мог стать зелёным, не открыв ни одной страницы («22 skipped»,
+код возврата 0).
+
+| Симптом | Причина |
+|---------|---------|
+| `PREFLIGHT FAILED: нет фикстур: …` | не запускался `manual_stand_simulator.py` |
+| `PREFLIGHT FAILED: нет учёток` | `manual-test-stand.json` без стенда — пересоздать `seed_manual_test_stand.py` |
+| `Нет фикстуры «…»` внутри теста | стенд пересоздали без `--simulator-fixtures` |
+| `Нет свободного слота для «…»` | залы заняты расписанием стенда; освободить час или пересоздать стенд |
+| всё skipped | нет `E2E_SIMULATOR=1` (его ставит оркестратор) |
 
 ## Спеки ↔ UC
 
-| Spec | UC |
-|------|-----|
-| `e2e/simulator/uc-owner-admin.spec.ts` | UC-OWNER-01, UC-FRONTDESK-09, UC-SALES-02, UC-OWNER-04 |
-| `e2e/simulator/uc-frontdesk.spec.ts` | UC-FRONTDESK-03…06, 11, 12 |
-| `e2e/simulator/uc-teacher-student.spec.ts` | UC-TEACHER-01…03, UC-CLIENT-01/02/04, UC-PARENT-02 |
-| `e2e/simulator/uc-renter.spec.ts` | UC-RENTER-01/02/05 |
-| `e2e/simulator/uc-isolation.spec.ts` | изоляция tenant (flow-street ≠ ritm-hall) |
+| Spec | UC | Что проверяется |
+|------|-----|-----------------|
+| `e2e/simulator/uc-owner-admin.spec.ts` | UC-OWNER-01, UC-FRONTDESK-09, UC-SALES-02, UC-OWNER-04 | KPI и очереди на главной, блок «Абонементы скоро заканчиваются», лид `INQUIRY` в таблице воронки, флаг финансов админу |
+| `e2e/simulator/uc-frontdesk.spec.ts` | UC-FRONTDESK-03…06, 11, 12 | продажа абонемента, проходная, фильтр «Заморожен», засеянный пропуск в карточке «Нужна отработка», раздел заявок, `№1` в листе ожидания |
+| `e2e/simulator/uc-teacher-student.spec.ts` | UC-TEACHER-01…03, UC-CLIENT-01/02/04, UC-PARENT-02 | расписание преподавателя, переключатель посещаемости на записанном студенте, заявки на отсутствие, «Расписание недели», отмена записи в строке занятия, проход QR, селектор ребёнка |
+| `e2e/simulator/uc-renter.spec.ts` | UC-RENTER-01/02/05 | создание брони субаренды, правка своей брони, счета в ЛК арендатора |
+| `e2e/simulator/uc-isolation.spec.ts` | изоляция tenant | STUDENT `flow-street` не попадает на `ritm-hall` и не видит его данных |
+
+Проверки привязаны к данным досева: карточка «Нужна отработка» сверяется с названием засеянного
+занятия, посещаемость — с записанным студентом, отмена — со строкой конкретного занятия. Раньше
+часть проверок допускала пустое состояние (`.ant-switch, .ant-empty`) и проходила, ничего не проверив.
+
+Пересечение с integration: `UC-SALES-02` ≈ `TC-OWNER-FUNNEL-01`, `UC-FRONTDESK-06` ≈
+`TC-ADMIN-MAKEUP-01`, `UC-PARENT-02` ≈ `TC-STUDENT-FAMILY-01` из `e2e/integration/stage2-gap.spec.ts`.
+В симуляторе они опираются на данные стенда, в integration — на свой seed; объединение не решено.
 
 Не автоматизируются (gap «нет» / вне скоупа): FRONTDESK-01, FRONTDESK-07, TEACHER-06, RENTER-04.
 
-## Soak (этап 3)
-
-После зелёных UC-сценариев — отдельный API soak, не CI:
+## Soak (API, не CI)
 
 ```powershell
 python scripts/qa/soak_studio_simulator.py --duration 5
 ```
+
+Действия по учёткам стенда: поиск на проходной, воронка, сводный оборот, `needs-makeup`, свои
+записи. Токен на учётку кэшируется — логин на каждом шаге упирался в rate limit на login и мерил
+логин вместо эндпоинта.
+
+| Опция | Смысл |
+|-------|-------|
+| `--studio` | slug стенда, по умолчанию `ritm-hall` |
+| `--duration` / `--interval` | минуты прогона и пауза между действиями |
+| `--seed` | фиксирует выбор учёток и действий |
+| `--max-error-rate` | допустимая доля ошибок; превышение — ненулевой код возврата |
+
+Итог: `p50/p95/max` по каждому действию и ошибки по действиям, отчёт `generated/soak-report.json`.
 
 ## Связанные документы
 

@@ -37,8 +37,8 @@
 
 ## Связанные материалы
 
-- Ручные сценарии стенда: [manual-testing/manual-stand-role-scenarios.md](../manual-testing/manual-stand-role-scenarios.md)
-- User guides: [user-guides/ru/](../user-guides/ru/README.md)
+- Ручные сценарии стенда: [manual-testing/manual-stand-role-scenarios.md](../../manual-testing/manual-stand-role-scenarios.md)
+- User guides: [user-guides/ru/](../../user-guides/ru/README.md)
 - Домен MyWay: `myway/.ai/master-spec.yaml`
 
 ## Критерий готовности

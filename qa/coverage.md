@@ -50,15 +50,22 @@
 
 ## Simulator (`e2e/simulator/`)
 
-Ручной стенд, UC-каталог. Запуск: [use-cases/simulator.md](use-cases/simulator.md).
+Ручной стенд, UC-каталог. Запуск и фикстуры: [use-cases/simulator.md](use-cases/simulator.md).
+
+Условных skip внутри тестов нет: незасеянная фикстура — падение с командой досева, а не пропуск.
+Единственный skip — «запущено без `E2E_SIMULATOR=1`».
 
 | Spec | UC | Статус |
 |------|-----|--------|
-| `uc-owner-admin.spec.ts` | UC-OWNER-01, UC-FRONTDESK-09, UC-SALES-02, UC-OWNER-04 | automated / partial |
+| `uc-owner-admin.spec.ts` | UC-OWNER-01, UC-FRONTDESK-09, UC-SALES-02, UC-OWNER-04 | automated |
 | `uc-frontdesk.spec.ts` | UC-FRONTDESK-03…06, 11, 12 | automated |
-| `uc-teacher-student.spec.ts` | UC-TEACHER-01…03, UC-CLIENT-01/02/04, UC-PARENT-02 | automated / partial |
-| `uc-renter.spec.ts` | UC-RENTER-01/02/05 | automated / partial |
+| `uc-teacher-student.spec.ts` | UC-TEACHER-01…03, UC-CLIENT-01/02/04, UC-PARENT-02 | automated |
+| `uc-renter.spec.ts` | UC-RENTER-01/02/05 | automated (serial) |
 | `uc-isolation.spec.ts` | tenant isolation flow-street ↔ ritm-hall | automated |
+
+Дубли с integration: `UC-SALES-02` ≈ `TC-OWNER-FUNNEL-01`, `UC-FRONTDESK-06` ≈ `TC-ADMIN-MAKEUP-01`,
+`UC-PARENT-02` ≈ `TC-STUDENT-FAMILY-01` (`stage2-gap.spec.ts`). Отличие — источник данных: стенд
+против seed. Объединять или нет — не решено.
 
 ## Smoke (`e2e/smoke/`)
 
