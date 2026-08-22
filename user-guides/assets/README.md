@@ -28,7 +28,9 @@
 | `admin-work.png` | График работы | [role-vladelec.md](../ru/role-vladelec.md#kadry) |
 | `news-admin.png` | Новости студии | [role-vladelec.md](../ru/role-vladelec.md#novosti-i-zayavki) |
 | `join-requests.png` | Заявки | [role-vladelec.md](../ru/role-vladelec.md#novosti-i-zayavki) |
+| `funnel.png` | Воронка продаж: лид заявки с сайта и лид регистрации | [role-vladelec.md](../ru/role-vladelec.md#voronka) |
 | `me-home.png` | Личная главная | [role-student.md](../ru/role-student.md#kabinet-i-menyu) |
+| `me-schedule.png` | Моё расписание: своя запись и кнопка отмены | [role-student.md](../ru/role-student.md#raspisanie) |
 | `settings-org.png` | Настройки | [role-vladelec.md](../ru/role-vladelec.md#nastroiki) |
 | `privacy.png` | Профиль и приватность | [role-vladelec.md](../ru/role-vladelec.md#nastroiki) |
 | `feedback.png` | Обратная связь | [role-vladelec.md](../ru/role-vladelec.md#obratnaya-svyaz) |
@@ -50,6 +52,10 @@ npm run capture:user-guide-screenshots
 ```
 
 Скрипт: `frontend/e2e/capture-user-guide-screenshots.spec.ts`.
+
+Снимки должны показывать данные, а не пустые экраны, поэтому seed заводит их сам: лид заявки с
+сайта (для `funnel.png`) и занятие текущей недели с записью студента (для `me-schedule.png`).
+Без `seed_e2e_fixtures.py` эти два кадра снять нечем — съёмка упадёт на ожидании строки.
 
 **Вручную:** API + фронт, учётки из `.env.e2e`, открыть экран и сохранить PNG с именем из таблицы.
 
