@@ -59,11 +59,15 @@ Skill агента: `run-simulator`.
 
 | Spec | UC | Статус |
 |------|-----|--------|
-| `uc-owner-admin.spec.ts` | UC-OWNER-01, UC-FRONTDESK-09, UC-SALES-02, UC-OWNER-04 | automated |
-| `uc-frontdesk.spec.ts` | UC-FRONTDESK-03…06, 11, 12 | automated |
-| `uc-teacher-student.spec.ts` | UC-TEACHER-01…03, UC-CLIENT-01/02/04, UC-PARENT-02 | automated |
-| `uc-renter.spec.ts` | UC-RENTER-01/02/05 | automated (serial) |
+| `uc-owner-admin.spec.ts` | OWNER-01…06, FRONTDESK-09, SALES-01/02 | automated |
+| `uc-frontdesk.spec.ts` | FRONTDESK-02…06, 08, 10…12 | automated |
+| `uc-teacher-student.spec.ts` | TEACHER-01…05, CLIENT-01…05, PARENT-01…04 | automated |
+| `uc-manager.spec.ts` | MANAGER-01…04 | automated |
+| `uc-renter.spec.ts` | RENTER-01…03, 05 | automated (serial) |
+| `uc-cleaner.spec.ts` | CLEANER-01/02 | automated |
 | `uc-isolation.spec.ts` | tenant isolation flow-street ↔ ritm-hall | automated |
+
+Вне скоупа (нет в продукте): FRONTDESK-01, FRONTDESK-07, TEACHER-06, RENTER-04.
 
 Пересечение с integration (`UC-SALES-02` / `TC-OWNER-FUNNEL-01`, `UC-FRONTDESK-06` /
 `TC-ADMIN-MAKEUP-01`, `UC-PARENT-02` / `TC-STUDENT-FAMILY-01`) **оставлено**: контуры гоняются на
