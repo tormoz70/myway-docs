@@ -100,6 +100,7 @@ npx playwright test --project=integration --workers=1
 
 ## Simulator (ручной стенд UC)
 
+Skill агента: **`run-simulator`** (`.cursor/skills/run-simulator` в myway).  
 Отдельный контур: `generated/manual-test-stand.json`, **без** cleanup integration.
 
 ```powershell
