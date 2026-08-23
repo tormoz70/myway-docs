@@ -9,6 +9,8 @@
 |-------|---------|---------|---------|
 | **Integration** (основной) | `cd frontend && npm run test:e2e:integration` | `:8080` + Vite `:5173` | `integration` |
 | **Simulator** (ручной стенд UC) | `cd frontend && npm run test:e2e:simulator` | `:8080` + Vite `:5173` + `manual-test-stand.json` | `simulator` |
+
+На Linux npm-скрипты E2E вызывают `python3` через `scripts/qa/run-python.mjs` (команды `python` может не быть).
 | **Smoke** | `CI=true`, `E2E_INTEGRATION=0`, `npm run build`, `npm run test:e2e -- --project=smoke` | не нужен | `smoke` |
 
 Smoke **не** замена integration. `npm run test:e2e` без `--project=smoke` и без `E2E_INTEGRATION=0` подтянет integration-спеки и потребует seed.
