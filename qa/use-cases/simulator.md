@@ -103,13 +103,15 @@ python scripts/qa/run_e2e_simulator.py --skip-playwright           # тольк�
 
 | Spec | UC | Глубина |
 |------|-----|---------|
-| `e2e/simulator/uc-owner-admin.spec.ts` | OWNER-01…06, FRONTDESK-09, SALES-01/02 | KPI и очереди; справочник абонементов; invite staff; флаг финансов; экспорт 1С; оборот по залу/преподавателю; истекающий абонемент из досева; лид `INQUIRY` с именем |
-| `e2e/simulator/uc-frontdesk.spec.ts` | FRONTDESK-02…06, 08, 10…12 | лид воронки; модалка продажи; сканер+поиск; фильтр «Заморожен» с держателем; makeup-карточка; слот Open; субаренда админом; заявка преподавателя; waitlist `№1` |
-| `e2e/simulator/uc-teacher-student.spec.ts` | TEACHER-01…05, CLIENT-01…05, PARENT-01…04 | плитка занятия; attendance switch; SHIFT_SWAP; нет финансов/продажи у INSTRUCTOR; запись на Open; отмена; «Мои абонементы»; QR; витрина; actingAs; замена видна ученику |
-| `e2e/simulator/uc-manager.spec.ts` | MANAGER-01…04 | неделя расписания; KPI воронки; карточка клиента; панель замены на вхождении |
-| `e2e/simulator/uc-renter.spec.ts` | RENTER-01…03, 05 | бронь; правка; календарь на след. неделю (фикс-слот частично); счета |
-| `e2e/simulator/uc-cleaner.spec.ts` | CLEANER-01/02 | «Сегодня в залах»; заявки на отсутствие |
-| `e2e/simulator/uc-isolation.spec.ts` | изоляция tenant | STUDENT `flow-street` не видит `ritm-hall` |
+| `e2e/simulator/uc-owner-admin.spec.ts` | OWNER-01…06, FRONTDESK-09, SALES-01/02 | **мутация:** KPI→очередь; создать тариф и в архив; invite+delete; флаг финансов on/off; экспорт 1С; группировка по залу; истекающий абонемент; фильтр воронки; статус лида CONTACTED→NEW |
+| `e2e/simulator/uc-frontdesk.spec.ts` | FRONTDESK-02…06, 08, 10…12 | **мутация:** лид CONTACTED→NEW; продажа+revoke; поиск на входе; разморозка+freeze; отработка+restore occurrence; запись клиента+restore; бронь субаренды+отмена; approve join+delete member; waitlist снять запись+restore |
+| `e2e/simulator/uc-teacher-student.spec.ts` | TEACHER-01…05, CLIENT-01…05, PARENT-01…04 | **мутация:** открыть своё занятие; посещаемость toggle+restore; новое обращение+reject; честные негативы (нет ведомости/продажи); запись на Open+restore; отмена записи+restore; карточка абонемента; свой QR; публичная заявка; направление; actingAs; замена преподавателя+DELETE override; заморозка детского пропуска+unfreeze |
+| `e2e/simulator/uc-manager.spec.ts` | MANAGER-01…04 | **мутация:** создать разовое занятие+удалить; KPI→воронка; заметка клиенту; замена на openClass+DELETE override |
+| `e2e/simulator/uc-renter.spec.ts` | RENTER-01…03, 05 | **мутация, не serial:** каждый кейс создаёт бронь и отменяет; правка комментария; бронь видна; счета без новых unpaid |
+| `e2e/simulator/uc-cleaner.spec.ts` | CLEANER-01/02 | **мутация:** QR с главной; заявка на отсутствие+reject |
+| `e2e/simulator/uc-isolation.spec.ts` | изоляция tenant | редирект STUDENT `flow-street` с чужого slug `ritm-hall` |
+
+`automated` в симуляторе = клик/API-действие меняет видимое состояние, затем **restore в `finally`**. Не считать «элемент виден» достаточным покрытием UC. Вне продукта по-прежнему не автоматизируются: FRONTDESK-01, FRONTDESK-07, TEACHER-06, RENTER-04.
 
 Проверки привязаны к данным досева: карточка «Нужна отработка» сверяется с названием засеянного
 занятия, посещаемость — с записанным студентом, отмена — со строкой конкретного занятия. Раньше

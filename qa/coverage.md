@@ -11,7 +11,7 @@
 | **simulator** | `simulator` | `npm run test:e2e:simulator` — ручной стенд UC, без cleanup; skill `run-simulator` |
 | **smoke** | `smoke` | `CI=true E2E_INTEGRATION=0 npm run test:e2e -- --project=smoke` — mock/статика, backend не нужен |
 
-**Статус:** `automated` — сценарий доходит до проверки; `partial` — UI/API кусок или skip по условию; `manual` — только руками; `removed` — фичи нет.
+**Статус:** `automated` — сценарий доходит до проверки. В контуре **simulator** это значит: действие в UI, видимое новое состояние, **restore в `finally`** (стенд общий). `partial` — UI/API кусок или skip по условию; `manual` — только руками; `removed` — фичи нет.
 
 Имена тестов в коде используют **канон** `TC-OWNER-*`, `TC-INSTRUCTOR-*` и т.д. из `cases/role-*.md`.
 
@@ -63,7 +63,7 @@ Skill агента: `run-simulator`.
 | `uc-frontdesk.spec.ts` | FRONTDESK-02…06, 08, 10…12 | automated |
 | `uc-teacher-student.spec.ts` | TEACHER-01…05, CLIENT-01…05, PARENT-01…04 | automated |
 | `uc-manager.spec.ts` | MANAGER-01…04 | automated |
-| `uc-renter.spec.ts` | RENTER-01…03, 05 | automated (serial) |
+| `uc-renter.spec.ts` | RENTER-01…03, 05 | automated |
 | `uc-cleaner.spec.ts` | CLEANER-01/02 | automated |
 | `uc-isolation.spec.ts` | tenant isolation flow-street ↔ ritm-hall | automated |
 
