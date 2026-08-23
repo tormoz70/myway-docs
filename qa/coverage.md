@@ -8,7 +8,7 @@
 | Контур | Project | Как запускается |
 |--------|---------|-----------------|
 | **integration** | `integration` | `npm run test:e2e:integration` — seed → все `e2e/integration/**` → cleanup |
-| **simulator** | `simulator` | `npm run test:e2e:simulator` — ручной стенд UC, без cleanup |
+| **simulator** | `simulator` | `npm run test:e2e:simulator` — ручной стенд UC, без cleanup; skill `run-simulator` |
 | **smoke** | `smoke` | `CI=true E2E_INTEGRATION=0 npm run test:e2e -- --project=smoke` — mock/статика, backend не нужен |
 
 **Статус:** `automated` — сценарий доходит до проверки; `partial` — UI/API кусок или skip по условию; `manual` — только руками; `removed` — фичи нет.
@@ -52,6 +52,7 @@
 ## Simulator (`e2e/simulator/`)
 
 Ручной стенд, UC-каталог. Запуск и фикстуры: [use-cases/simulator.md](use-cases/simulator.md).
+Skill агента: `run-simulator`.
 
 Условных skip внутри тестов нет: незасеянная фикстура — падение с командой досева, а не пропуск.
 Единственный skip — «запущено без `E2E_SIMULATOR=1`».

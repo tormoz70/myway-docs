@@ -3,6 +3,8 @@
 Детерминированный «день студии» на **ручном стенде** (`ritm-hall` + контроль изоляции `flow-street`).  
 Не смешивать с integration E2E (`e2e-seed`, cleanup).
 
+Skill агента: **`run-simulator`** (`.cursor/skills/run-simulator` в myway).
+
 ## Предусловия
 
 1. Dev stack: Postgres/Redis/MinIO, backend `:8080`, Vite `:5173` (skill `run-dev-stack` или `scripts/dev-local.ps1`).
@@ -144,6 +146,7 @@ python scripts/qa/soak_studio_simulator.py --duration 5
 
 ## Связанные документы
 
+- Skill агента: `myway/.cursor/skills/run-simulator/SKILL.md`
 - Каталог UC: [catalog.md](./catalog.md)
 - Gap: [myway-gap.md](./myway-gap.md)
 - Запуск E2E: [../run.md](../run.md)
