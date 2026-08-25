@@ -6,7 +6,7 @@
 |------|------------|
 | [run.md](run.md) | Как поднять стенд, SMTP, seed, smoke vs integration |
 | [coverage.md](coverage.md) | Живые `*.spec.ts` ↔ ID кейса |
-| [cases/](cases/) | Ручные тест-кейсы по ролям (`TC-OWNER-*`, `TC-ANON-*`, …) |
+| [cases/](cases/) | Ручные тест-кейсы по ролям (`TC-OWNER-*`, `TC-ANON-*`, …) и ops (`TC-OPS-*`) |
 | [use-cases/](use-cases/) | Каталог отраслевых use case и сверка с MyWay |
 | [Прогон стенда](../manual-testing/manual-stand-role-scenarios.md) | Сценарии по ролям на seed `seed_manual_test_stand.py` |
 
@@ -25,7 +25,9 @@
 | [role-sub-tenant.md](cases/role-sub-tenant.md) | SUB_TENANT |
 | [role-instructor.md](cases/role-instructor.md) | INSTRUCTOR |
 | [role-student.md](cases/role-student.md) | STUDENT |
+| [ops-monitoring.md](cases/ops-monitoring.md) | Инфраструктура / мониторинг (`TC-OPS-MON-*`, не роль) |
 
-Идентификаторы вида `TC-<РОЛЬ>-<ФОРМА>-NN`. Префикс URL — `/go`. Ярлыки `TC-OWN-*` / `TC-GEN-*` в именах Playwright-тестов — исторические; канон — колонка «Кейс» в [coverage.md](coverage.md).
+Идентификаторы вида `TC-<РОЛЬ>-<ФОРМА>-NN` или `TC-OPS-<ОБЛАСТЬ>-NN` (см. `00-conventions.md` §3).
+Префикс URL — `/go`. Ярлыки `TC-OWN-*` / `TC-GEN-*` в именах Playwright-тестов — исторические; канон — колонка «Кейс» в [coverage.md](coverage.md).
 
 Код спеков: `myway/frontend/e2e/`. Skill агента: `myway/.cursor/skills/run-e2e`.
