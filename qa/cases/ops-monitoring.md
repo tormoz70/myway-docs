@@ -50,9 +50,12 @@
 - **Предусловие:** либо подпрофиль `observability-logs` (Loki/Promtail), либо `docker logs`
   backend (ECS JSON).
 - **Шаги:**
-  1. `curl -sI http://127.0.0.1:8080/api/public/organizations/by-slug/no-such-slug`
-     (или публичный URL) — запомнить `X-Trace-Id`. Ответ 404; `GlobalExceptionHandler`
-     пишет WARN с `traceId` в MDC. `/livez` заголовок ставит, но строки лога не пишет.
+  1. `curl -sS -D - -o /dev/null http://127.0.0.1:8080/api/public/organizations/by-slug/no-such-slug`
+     (GET, не `curl -I` / HEAD: `permitAll` для `/api/public/**` привязан к GET,
+     HEAD даст 401 до `GlobalExceptionHandler`). Запомнить `X-Trace-Id`.
+     Ответ 404; handler пишет WARN с `traceId` в MDC. Per-request access-лога
+     в проекте нет, поэтому в лог попадает только то, что прошло через
+     `GlobalExceptionHandler` — `/livez` заголовок ставит, строки не пишет.
   2. Grafana → Explore → Loki, LogQL:
      `{container=~".+"} | json | traceId="<значение>"`
      (не дашборд `myway-logs` как единственный способ). Либо
