@@ -13,7 +13,8 @@
 
 **Статус:** `automated` — сценарий доходит до проверки. В контуре **simulator** это значит: действие в UI, видимое новое состояние, **restore в `finally`** (стенд общий). `partial` — UI/API кусок или skip по условию; `manual` — только руками; `removed` — фичи нет.
 
-Имена тестов в коде используют **канон** `TC-OWNER-*`, `TC-INSTRUCTOR-*` и т.д. из `cases/role-*.md`.
+Имена тестов в коде используют **канон** `TC-OWNER-*`, `TC-INSTRUCTOR-*`, `TC-OPS-*` и т.д.
+из `cases/role-*.md` и неролевых файлов вроде `cases/ops-monitoring.md`.
 
 ## Integration (`e2e/integration/`)
 
@@ -108,6 +109,7 @@ Skill агента: `run-simulator`.
 | TC-OWNER-FIN-CAT-02 / EXP-02 сохранение | FIN-CAT только модалки |
 | PassAllocation, utility rebill, tickets как оборот | нет |
 | RLS / чужой tenant | CONV-TENANT-ISOLATION, нет спека |
+| TC-OPS-MON-01…05 | мониторинг пилота / локальный оверлей; [ops-monitoring.md](cases/ops-monitoring.md) |
 
 ## Удалено (не описывать и не чинить)
 
