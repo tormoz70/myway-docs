@@ -105,11 +105,11 @@ Skill агента: `run-simulator`.
 
 | UC | Кейс | Статус прогона |
 |----|------|----------------|
-| UC-OWNER-01 | `TC-OWNER-DASH-05`, `TC-OWNER-DASH-06`, `TC-OWNER-DASH-07` | pending |
-| UC-OWNER-05 | `TC-OWNER-EXPORT-03` | pending |
-| UC-OWNER-06 | `TC-OWNER-FIN-TURN-07` | pending |
-| UC-MANAGER-02 | `TC-ADMIN-DASH-03` | pending |
-| UC-MANAGER-03 | `TC-ADMIN-CLIENT-01` | pending |
+| UC-OWNER-01 | `TC-OWNER-DASH-05`, `TC-OWNER-DASH-06`, `TC-OWNER-DASH-07` | manual PASS (2026-08-27, ritm-hall + simulator fixtures) |
+| UC-OWNER-05 | `TC-OWNER-EXPORT-03` | manual PASS (экспорт ZIP + тост; workflow «закрытия месяца» как отдельный UI — gap) |
+| UC-OWNER-06 | `TC-OWNER-FIN-TURN-07` | manual PASS (`groupBy=ROOM,INSTRUCTOR`, блоки прибыли по измерению) |
+| UC-MANAGER-02 | `TC-ADMIN-DASH-03` | manual PASS (воронка, лид «Симулятор Лид» +79005550199) |
+| UC-MANAGER-03 | `TC-ADMIN-CLIENT-01` | automated PASS (`uc-manager.spec.ts` UC-MANAGER-03); ручной UI — Clients → поиск → профиль → заметка |
 
 Simulator-покрытие тех же UC: `uc-owner-admin.spec.ts`, `uc-manager.spec.ts` (см. [use-cases/simulator.md](use-cases/simulator.md)).
 
