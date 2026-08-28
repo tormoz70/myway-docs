@@ -196,6 +196,27 @@
 
 ---
 
+## Форма: Платформа → Мониторинг (`?tab=monitoring`)
+
+Эндпоинты: `GET /platform/monitoring/overview`, `GET /platform/monitoring/series`,
+`POST /platform/monitoring/grafana-session`, прокси `/platform/monitoring/grafana/**`.
+
+### TC-SUPERADMIN-MON-01 — [Отображение] Вкладка доступна оператору платформы
+- **Шаги:** `/go/platform` → вкладка **«Мониторинг»**.
+- **Ожидаемый результат:** вкладка видна и SUPER_ADMIN, и SUPER_USER (не только SUPER_ADMIN);
+  открывается по прямой ссылке `?tab=monitoring`; шапка показывает стенд и версию сборки.
+
+### TC-SUPERADMIN-MON-02 — [Доступ] Тенантные роли не видят мониторинг
+- **Шаги:** под OWNER / ADMIN / INSTRUCTOR вызвать `GET /api/platform/monitoring/overview`
+  и `POST /api/platform/monitoring/grafana-session`.
+- **Ожидаемый результат:** 403 на оба запроса; вкладки в UI нет (страница `/go/platform`
+  закрыта `RoleGuard`).
+
+Полный сценарий с плитками, алертами, порогами и бесшовным входом в Grafana —
+[ops-monitoring.md](./ops-monitoring.md): `TC-OPS-MON-06`, `TC-OPS-MON-07`.
+
+---
+
 ## Форма: Обратная связь (`/go/:slug/manage/feedback`)
 
 Эндпоинты: `POST /feedback`, `GET /feedback/mine`.

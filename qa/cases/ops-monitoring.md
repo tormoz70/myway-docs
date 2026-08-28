@@ -1,8 +1,10 @@
 # Тест-кейсы: мониторинг пилота (ops)
 
 Профиль Docker Compose `observability`. UI Grafana/Prometheus/Alertmanager/GlitchTip
-доступны только через SSH-туннель на loopback VM. Runbook:
-`myway/deploy/pilot/OBSERVABILITY.md`. Локальный стенд: skill `run-observability-stack`.
+наружу не публикуются: SSH-туннель на loopback VM, а для Grafana ещё и вкладка
+**«Мониторинг»** в кабинете платформы (`TC-OPS-MON-06`, `TC-OPS-MON-07`). Runbook:
+`myway/deploy/pilot/OBSERVABILITY.md`, устройство — `myway/docs/PLATFORM-MONITORING-UI.md`.
+Локальный стенд: skill `run-observability-stack`.
 
 Семейство `TC-OPS-*` — инфраструктура вне ролевой матрицы (см. `00-conventions.md` §3).
 Прогонять `TC-OPS-MON-01` и `TC-OPS-MON-03` имеет смысл после фикса postgres-exporter
@@ -73,3 +75,43 @@
   наличии Docker (иначе в логе `SKIP docker compose config`).
 - **Негатив:** изменить порог в `alerts-*.yml`, не трогая `*_test.yml` →
   падает `promtool test rules` (гейт ловит расхождение правил и тестов), код 1.
+
+### TC-OPS-MON-06 — [Отображение] Вкладка «Мониторинг» в кабинете платформы
+- **Предусловие:** профиль `observability` поднят; в `compose.env` заданы
+  `MYWAY_MONITORING_PROMETHEUS_URL=http://prometheus:9090` и
+  `MYWAY_MONITORING_GRAFANA_URL=http://grafana:3000` (их дописывает
+  `deploy-pilot.ps1 -WithObservability`). Вход под `SUPER_ADMIN` или `SUPER_USER`.
+- **Шаги:** `/go/platform` → вкладка **«Мониторинг»**.
+- **Ожидаемый результат:** в шапке стенд (`pilot`) и версия сборки; плитки по разделам
+  «API и доступность», «Бэкенд», «Данные», «Хост» заполнены; заголовок карточки сборщиков
+  метрик совпадает с `/api/v1/targets` (сколько `up` из общего числа); упавшие сборщики —
+  сверху с текстом ошибки. Метрика, которой нет в стенде, показана прочерком, **не** нулём.
+- **Проверка:** значения плиток сходятся с `GET /api/platform/monitoring/overview` и с тем же
+  PromQL в Prometheus. Пороги в подписи плитки соответствуют `alerts-*.yml`
+  (WARN раньше алерта, CRIT ровно на пороге).
+- **Негатив:** пустой `MYWAY_MONITORING_PROMETHEUS_URL` → вкладка объясняет, что мониторинг
+  не подключён к стенду; Prometheus остановлен → баннер «Prometheus не отвечает», плитки
+  в состоянии «нет данных», 5xx нет.
+
+### TC-OPS-MON-07 — [Доступ] Бесшовный переход в Grafana из кабинета
+- **Предусловие:** как в `TC-OPS-MON-06`; Grafana с `GF_AUTH_PROXY_ENABLED=true` и
+  `GF_SERVER_SERVE_FROM_SUB_PATH=true` (дефолт compose).
+- **Шаги:**
+  1. Вкладка «Мониторинг» → карточка «Дашборды Grafana» → **«Показать здесь»**.
+  2. Затем **«Открыть в новой вкладке»**.
+- **Ожидаемый результат:** дашборд отображается внутри кабинета (kiosk, без навигации Grafana);
+  пароль Grafana не спрашивается; в новой вкладке открывается полная Grafana под тем же
+  оператором (`Explore` доступен). Панели показывают данные, а не «No data».
+- **Проверка:** `POST /api/platform/monitoring/grafana-session` ставит cookie
+  `myway_grafana_session` с `HttpOnly`, `SameSite=Lax` и
+  `Path=/api/platform/monitoring/grafana`; `GET /api/platform/monitoring/grafana/api/user`
+  возвращает email оператора и `authLabels: ["Auth Proxy"]`.
+- **Негатив:**
+  - тот же GET без cookie → 401, запрос до Grafana не доходит;
+  - клиентские заголовки `X-WEBAUTH-USER: attacker` / `X-WEBAUTH-ROLE: Admin` игнорируются —
+    в Grafana остаётся email оператора и роль из `MYWAY_MONITORING_GRAFANA_ROLE`;
+  - OWNER / ADMIN / INSTRUCTOR на `/api/platform/monitoring/overview` и
+    `POST .../grafana-session` → 403;
+  - `/grafana/**` и `/actuator/*` по публичному домену остаются недоступны
+    (`scripts/smoke/actuator-exposure.sh` без изменений);
+  - веб-сокет `.../grafana/api/live/ws` → 501 (Grafana Live через прокси не поддерживается).
