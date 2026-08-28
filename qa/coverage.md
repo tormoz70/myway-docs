@@ -109,7 +109,7 @@ Skill агента: `run-simulator`.
 | TC-OWNER-FIN-CAT-02 / EXP-02 сохранение | FIN-CAT только модалки |
 | PassAllocation, utility rebill, tickets как оборот | нет |
 | RLS / чужой tenant | CONV-TENANT-ISOLATION, нет спека |
-| TC-OPS-MON-01…07 | мониторинг пилота / локальный оверлей, включая вкладку «Мониторинг» в кабинете платформы и переход в Grafana; [ops-monitoring.md](cases/ops-monitoring.md) |
+| TC-OPS-MON-01…08 | мониторинг пилота / локальный оверлей, включая вкладку «Мониторинг» в кабинете платформы, переход в Grafana и мобильную раскладку вкладки; [ops-monitoring.md](cases/ops-monitoring.md) |
 
 ## Удалено (не описывать и не чинить)
 
