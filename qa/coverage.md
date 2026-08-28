@@ -99,6 +99,20 @@ Skill агента: `run-simulator`.
 |------|-------------|
 | `e2e/capture-user-guide-screenshots.spec.ts` | отдельный `playwright.user-guide.config.ts`, не регресс |
 
+## UC gap — ручные кейсы (пилот 2026-08)
+
+Закрывают «частично» из [use-cases/myway-gap.md](use-cases/myway-gap.md), где simulator есть, но не хватает воспроизводимых ручных шагов на `ritm-hall`.
+
+| UC | Кейс | Статус прогона |
+|----|------|----------------|
+| UC-OWNER-01 | `TC-OWNER-DASH-05`, `TC-OWNER-DASH-06`, `TC-OWNER-DASH-07` | manual PASS (2026-08-27, ritm-hall + simulator fixtures) |
+| UC-OWNER-05 | `TC-OWNER-EXPORT-03` | manual PASS (экспорт ZIP + тост; workflow «закрытия месяца» как отдельный UI — gap) |
+| UC-OWNER-06 | `TC-OWNER-FIN-TURN-07` | manual PASS (`groupBy=ROOM,INSTRUCTOR`, блоки прибыли по измерению) |
+| UC-MANAGER-02 | `TC-ADMIN-DASH-03` | manual PASS (воронка, лид «Симулятор Лид» +79005550199) |
+| UC-MANAGER-03 | `TC-ADMIN-CLIENT-01` | automated PASS (`uc-manager.spec.ts` UC-MANAGER-03); ручной UI — Clients → поиск → профиль → заметка |
+
+Simulator-покрытие тех же UC: `uc-owner-admin.spec.ts`, `uc-manager.spec.ts` (см. [use-cases/simulator.md](use-cases/simulator.md)).
+
 ## Нет E2E / только руки
 
 | Кейс | Комментарий |
