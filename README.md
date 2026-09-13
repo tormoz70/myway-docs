@@ -7,6 +7,7 @@
 | Каталог | Назначение |
 |---------|------------|
 | [`user-guides/`](user-guides/) | Руководства пользователя (RU), скриншоты UI |
+| [`marketing/`](marketing/) | Карточка продукта для потенциальных клиентов |
 | [`qa/`](qa/) | Ручные кейсы по ролям, запуск E2E, покрытие Playwright, каталог use case |
 | [`manual-testing/`](manual-testing/) | Прогон стенда по ролям (`manual-stand-role-scenarios.md`); остальное в `qa/` |
 
