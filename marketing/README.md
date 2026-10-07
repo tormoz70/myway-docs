@@ -5,6 +5,9 @@
 | Файл | Назначение |
 |------|------------|
 | [product-card.md](./product-card.md) | Описание платформы для потенциальных клиентов |
+| [outreach.md](./outreach.md) | Краткое сообщение для рассылки со ссылкой на карточку |
+| [outreach-candidates.md](./outreach-candidates.md) | Кандидаты на пилотную рассылку (студии по России) |
+| [demo-scenario.md](./demo-scenario.md) | Сценарий созвона на 30–40 минут; клиенту не отправлять |
 
 **Ссылка, которую отправляют клиентам:** [https://myway-line.ru/product](https://myway-line.ru/product)
 
