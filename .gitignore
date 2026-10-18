@@ -16,9 +16,20 @@ ehthumbs.db
 .env.*.local
 .env.e2e
 
+# Outreach local secrets / logs
+marketing/vk-outreach/.env
+marketing/vk-outreach/send_log.csv
+marketing/email-outreach/.env
+marketing/email-outreach/send_log.csv
+
 # Playwright auth dumps (локальные сессии)
 frontend/e2e/.auth/
 
 # Logs
 *.log
 myway-deploy.tgz
+
+# Python
+__pycache__/
+*.py[cod]
+marketing/email-outreach/.env.example

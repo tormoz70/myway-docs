@@ -13,20 +13,28 @@
 
 Сильный fit: несколько залов и/или субаренда, либо явная «боль» (запись в Telegram / «скоро сделаем удобную запись»).
 
-| # | Студия | Город | Формат | Почему подходит | Контакт | Сайт |
-|---|--------|-------|--------|-----------------|---------|------|
-| 1 | Social Dance Studio | Нижний Новгород | Танцы + **6 залов в аренду** | Группы + субаренда; email на сайте | done_well@mail.ru · +7 (831) 423-42-12 | https://social-dance.ru/ |
-| 2 | Станция | Екатеринбург | **8 залов**, субаренда хореографам | Классический сценарий Pro (субаренда); пилот — про расписание/резидентов | stationdance@yandex.ru · пр. Ленина, 50Д | https://ekb.stationdance.ru/ |
-| 3 | DekaDance | Новосибирск | Танцы, **4 зала**, бронь аренды | 2 площадки; онлайн-аренда уже есть — интерес к единому кабинету | deka-dance@mail.ru · +7 (383) 383-04-00 | https://deka-dance.ru/ |
-| 4 | САРАФАН (Sarafanfam) | Ростов-на-Дону | Танцы, **3 филиала / 6 залов**, аренда | Средний размер под Start; email | sarafanstudio@gmail.com · +7 (928) 279-80-46 | https://dance-sarafanfam.ru/ |
-| 5 | Империя танца | Казань | Танцы, **3 зала** + аренда | 2 адреса; явный email владельца | dancekzn@mail.ru · +7 (843) 205-00-16 | https://imperiadacekzn.ru/ |
-| 6 | LapLap Syndicate | Санкт-Петербург | Йога | На сайте: «в скором времени сделаем удобную современную запись» | +7 911 131-31-30 · Банковский пер., 3 | https://laplap-yoga.ru/ |
-| 7 | 6Sense | Самара | Танцы (pole) + аренда зала | Абонементы + аренда; email | 6sense_dance@mail.ru · +7 (903) 332-34-60 | https://6sense-dance.ru/ |
-| 8 | YogaPeople | Санкт-Петербург | Йога, **2 студии** | Абонемент на обе площадки; email | yogapeople@mail.ru · +7 (812) 941-79-51 | https://yogapeople.spb.ru/ |
-| 9 | Первая танцевальная школа | Москва | Сальса / бачата | Абонементы, расписание; email администратора | olga@dance-1.ru · +7 (926) 306-92-22 | https://www.dance-1.ru/ |
-| 10 | ПОТОК | Москва | Йога | Компактная студия, email | potok.yoga@yandex.ru · +7 (495) 822-75-55 | https://potok.yoga/ |
+| # | Студия | Город | Формат | Почему подходит | Email / тел | ВК (писать в сообщения сообщества) | Сайт |
+|---|--------|-------|--------|-----------------|-------------|-------------------------------------|------|
+| 1 | Social Dance Studio | Нижний Новгород | Танцы + **6 залов в аренду** | Группы + субаренда | done_well@mail.ru · +7 (831) 423-42-12 | [vk.com/club2774056](https://vk.com/club2774056) · [vk.me](https://vk.me/club2774056) | https://social-dance.ru/ |
+| 2 | Станция | Екатеринбург | **8 залов**, субаренда | Сценарий Pro / пилот | stationdance@yandex.ru · +7 (912) 680-78-78 | [vk.com/dancestationekb](https://vk.com/dancestationekb) · [vk.me](https://vk.me/dancestationekb) | https://ekb.stationdance.ru/ |
+| 3 | DekaDance | Новосибирск | Танцы, **4 зала**, аренда | 2 площадки | deka-dance@mail.ru · +7 (383) 383-04-00 | [vk.com/deka_dance](https://vk.com/deka_dance) · [vk.me](https://vk.me/deka_dance) | https://deka-dance.ru/ |
+| 4 | САРАФАН (Sarafanfam) | Ростов-на-Дону | **3 филиала / 6 залов** | Средний размер под Start | sarafanstudio@gmail.com · +7 (928) 279-80-46 | [vk.com/sarafanfam](https://vk.com/sarafanfam) · [vk.me](https://vk.me/sarafanfam) | https://dance-sarafanfam.ru/ |
+| 5 | Империя танца | Казань | **3 зала** + аренда | Email + VK на сайте | dancekzn@mail.ru · +7 (843) 205-00-16 | [vk.com/tancikazani](https://vk.com/tancikazani) · [vk.me](https://vk.me/tancikazani) | https://imperiadacekzn.ru/ |
+| 6 | LapLap Syndicate | Санкт-Петербург | Йога | «Скоро удобная запись» | +7 911 131-31-30 | VK на сайте не найден — WhatsApp/звонок | https://laplap-yoga.ru/ |
+| 7 | 6Sense | Самара | Pole + аренда | Email + VK | 6sense_dance@mail.ru · +7 (903) 332-34-60 | [vk.com/6sense_dance](https://vk.com/6sense_dance) · [vk.me](https://vk.me/6sense_dance) | https://6sense-dance.ru/ |
+| 8 | YogaPeople | Санкт-Петербург | Йога, **2 студии** | Email + VK | yogapeople@mail.ru · +7 (812) 941-79-51 | [vk.com/yogapeople](https://vk.com/yogapeople) · [vk.me](https://vk.me/yogapeople) | https://yogapeople.spb.ru/ |
+| 9 | Первая танцевальная школа | Москва | Сальса / бачата | Группа VK есть | olga@dance-1.ru · +7 (926) 306-92-22 | [vk.com/club11992386](https://vk.com/club11992386) · [vk.me](https://vk.me/club11992386) | https://www.dance-1.ru/ |
+| 10 | ПОТОК | Москва | Йога | На сайте скорее TG/IG | potok.yoga@yandex.ru · +7 (495) 822-75-55 | VK не найден — Telegram / WhatsApp с сайта | https://potok.yoga/ |
 
 На демо с 2, 3, 4, 5 — сразу уточнять субаренду (ветка Pro в [demo-scenario.md](./demo-scenario.md)).
+
+### ВК вместо почты
+
+Почта у холодного B2B часто уходит в спам — для блока A разумнее **личное сообщение в сообщество** (кнопка «Написать» / ссылка `vk.me/...`), не пост на стену и не комментарии.
+
+Скрипты первой группы:
+- почта с домена: [email-outreach/](./email-outreach/) — SMTP, `python send_email_outreach.py` → `--send`
+- ВК: [vk-outreach/](./vk-outreach/) — `python send_vk_outreach.py` → `--send`
 
 ---
 

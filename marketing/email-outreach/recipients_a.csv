@@ -1,0 +1,10 @@
+id,name,city,email,enabled,note
+1,Social Dance Studio,Нижний Новгород,done_well@mail.ru,yes,6 залов + аренда
+2,Станция,Екатеринбург,stationdance@yandex.ru,yes,8 залов субаренда
+3,DekaDance,Новосибирск,deka-dance@mail.ru,yes,4 зала
+4,САРАФАН,Ростов-на-Дону,sarafanstudio@gmail.com,yes,3 филиала
+5,Империя танца,Казань,dancekzn@mail.ru,yes,3 зала
+7,6Sense,Самара,6sense_dance@mail.ru,yes,pole + аренда
+8,YogaPeople,Санкт-Петербург,yogapeople@mail.ru,yes,2 студии
+9,Первая танцевальная школа,Москва,olga@dance-1.ru,yes,сальса бачата
+10,ПОТОК,Москва,potok.yoga@yandex.ru,yes,йога
