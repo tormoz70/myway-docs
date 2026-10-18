@@ -44,6 +44,7 @@
 | `staff-invite.api.spec.ts` | TC-OWNER-USERS-02A/02B/02C | partial (SMTP) |
 | `premise-hall.api.spec.ts` | TC-OWNER-HALL-05…08, PREM-04/05, ACCESS-01 | automated |
 | `schedule-entry-overnight.api.spec.ts` | overnight RENT | automated |
+| `schedule-live-class.spec.ts` | TC-OWNER-SCHED-11, TC-STUDENT-ME-06 | automated |
 | `chats/support-chat.spec.ts` | TC-OWNER-FEEDBACK / platform feedback | automated |
 | `chats/tenant-chat.spec.ts` | tenant ↔ platform chat | automated |
 | `chats/platform-chat.spec.ts` | platform operator chat | automated |
@@ -110,7 +111,6 @@ Skill агента: `run-simulator`.
 | PassAllocation, utility rebill, tickets как оборот | нет |
 | RLS / чужой tenant | CONV-TENANT-ISOLATION, нет спека |
 | TC-OPS-MON-01…08 | мониторинг пилота / локальный оверлей, включая вкладку «Мониторинг» в кабинете платформы, переход в Grafana и мобильную раскладку вкладки; [ops-monitoring.md](cases/ops-monitoring.md) |
-| TC-OWNER-SCHED-11, TC-STUDENT-ME-06 | ссылка на Jazz: API/RLS и кнопка в кабинете покрыты unit-тестами, сценарий в UI — руками |
 
 ## Удалено (не описывать и не чинить)
 
