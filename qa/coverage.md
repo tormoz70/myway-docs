@@ -110,6 +110,7 @@ Skill агента: `run-simulator`.
 | PassAllocation, utility rebill, tickets как оборот | нет |
 | RLS / чужой tenant | CONV-TENANT-ISOLATION, нет спека |
 | TC-OPS-MON-01…08 | мониторинг пилота / локальный оверлей, включая вкладку «Мониторинг» в кабинете платформы, переход в Grafana и мобильную раскладку вкладки; [ops-monitoring.md](cases/ops-monitoring.md) |
+| TC-OWNER-SCHED-11, TC-STUDENT-ME-06 | ссылка на Jazz: API/RLS и кнопка в кабинете покрыты unit-тестами, сценарий в UI — руками |
 
 ## Удалено (не описывать и не чинить)
 
